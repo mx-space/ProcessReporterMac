@@ -6,6 +6,8 @@
 //
 
 import AppKit
+import ScriptingBridge
+import MediaPlayer
 
 class Reporter {
     public static var shared = Reporter()
@@ -18,17 +20,18 @@ class Reporter {
         timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
 
             debugPrint("上报数据")
+            let mediaInfo = self.getCurrnetPlaying()
 
-            var endpoint = Store.shared.endpoint
-            var apiKey = Store.shared.apiKey
+            let endpoint = Store.shared.endpoint
+            let apiKey = Store.shared.apiKey
 
-            if endpoint == nil {
+            if endpoint == "" {
                 debugPrint("endpoint not define")
                 Store.shared.isReporting = false
                 return
             }
 
-            if apiKey == nil {
+            if apiKey == "" {
                 debugPrint("apiKey not define")
                 Store.shared.isReporting = false
                 return
@@ -36,7 +39,7 @@ class Reporter {
 
             let url = URL(string: endpoint)
 
-            guard (url != nil) else {
+            guard url != nil else {
                 debugPrint("endpoint parsing error")
                 Store.shared.isReporting = false
                 return
@@ -52,11 +55,18 @@ class Reporter {
 
             let timestamp = Date().timeIntervalSince1970
 
-            let postData: [String: Any] = [
-                "process": processName,
+            var postData: [String: Any] = [
+                "process": processName ?? "",
                 "timestamp": timestamp,
                 "key": apiKey,
             ]
+
+            if let mediaInfo = mediaInfo {
+                postData["media"] = [
+                    "title": mediaInfo.title,
+                    "artist": mediaInfo.artist,
+                ]
+            }
 
             var request = URLRequest(url: url!)
             request.httpMethod = "POST"
@@ -84,7 +94,7 @@ class Reporter {
         timer?.invalidate()
         timer = nil
     }
-    
+
     func setting() {
         if #available(macOS 13, *) {
             NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
@@ -92,8 +102,47 @@ class Reporter {
             NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
         }
     }
-    
+
     func isInited() -> Bool {
-        return Store.shared.apiKey != nil && Store.shared.apiKey != nil
+        return Store.shared.apiKey != "" && Store.shared.apiKey != ""
     }
+
+    func getCurrnetPlaying() -> MediaInfo? {
+        let args: [String] = ["", "get", "title", "artist"]
+
+        var cArgs = args.map { $0.withCString(strdup) }
+        var infoFromOC: String?
+
+        cArgs.withUnsafeMutableBufferPointer { buffer in
+            let argc = Int32(buffer.count)
+            let argv = buffer.baseAddress
+
+            let result = NowPlaying.processCommand(withArgc: argc, argv: argv)
+
+            infoFromOC = result
+        }
+
+        for ptr in cArgs { free(ptr) }
+
+        if let info = infoFromOC {
+            let arr = info.split(separator: "\n")
+            if arr.count < 2 {
+                return nil
+            }
+            let mediaInfo = MediaInfo(title: String(arr[0]), artist: String(arr[1]))
+
+            return mediaInfo
+        }
+        return nil
+    }
+    
+    
+    func getMusicApp() {
+        
+    }
+}
+
+struct MediaInfo {
+    var title: String
+    var artist: String
 }

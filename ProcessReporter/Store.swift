@@ -27,9 +27,8 @@ class Store: ObservableObject {
             UserDefaults.standard.setValue(endpoint, forKey: "endpoint")
         }
     }
-    
+
     @Published var isReporting = false
-    
-    
+
     public static let shared = Store()
 }

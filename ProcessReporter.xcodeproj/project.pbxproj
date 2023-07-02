@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F1E981B2A511E3F006A7D39 /* nowplaying.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E981A2A511E3F006A7D39 /* nowplaying.mm */; };
 		1F6FE2C92A468DFB00D646CE /* ProcessReporterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6FE2C82A468DFB00D646CE /* ProcessReporterApp.swift */; };
 		1F6FE2CD2A468DFC00D646CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F6FE2CC2A468DFC00D646CE /* Assets.xcassets */; };
 		1F6FE2D02A468DFC00D646CE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F6FE2CF2A468DFC00D646CE /* Preview Assets.xcassets */; };
@@ -17,6 +18,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F1E98192A511E3F006A7D39 /* ProcessReporter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProcessReporter-Bridging-Header.h"; sourceTree = "<group>"; };
+		1F1E981A2A511E3F006A7D39 /* nowplaying.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = nowplaying.mm; sourceTree = "<group>"; };
+		1F1E981C2A511E7C006A7D39 /* Enums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Enums.h; sourceTree = "<group>"; };
+		1F1E981D2A511EA3006A7D39 /* MRContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MRContent.h; sourceTree = "<group>"; };
+		1F1E981F2A512183006A7D39 /* nowplaying.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nowplaying.h; sourceTree = "<group>"; };
 		1F6FE2C52A468DFB00D646CE /* ProcessReporter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProcessReporter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6FE2C82A468DFB00D646CE /* ProcessReporterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessReporterApp.swift; sourceTree = "<group>"; };
 		1F6FE2CC2A468DFC00D646CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,10 +68,15 @@
 				1F6FE2DB2A469C6300D646CE /* MenuBarView.swift */,
 				1F6FE2D92A469B7500D646CE /* SettingView.swift */,
 				1F6FE2DD2A46F5CA00D646CE /* Reporter.swift */,
+				1F1E981A2A511E3F006A7D39 /* nowplaying.mm */,
+				1F1E981F2A512183006A7D39 /* nowplaying.h */,
 				1F6FE2D72A469A8300D646CE /* Store.swift */,
 				1F6FE2CC2A468DFC00D646CE /* Assets.xcassets */,
 				1F6FE2D12A468DFC00D646CE /* ProcessReporter.entitlements */,
 				1F6FE2CE2A468DFC00D646CE /* Preview Content */,
+				1F1E98192A511E3F006A7D39 /* ProcessReporter-Bridging-Header.h */,
+				1F1E981C2A511E7C006A7D39 /* Enums.h */,
+				1F1E981D2A511EA3006A7D39 /* MRContent.h */,
 			);
 			path = ProcessReporter;
 			sourceTree = "<group>";
@@ -110,6 +121,7 @@
 				TargetAttributes = {
 					1F6FE2C42A468DFB00D646CE = {
 						CreatedOnToolsVersion = 14.3.1;
+						LastSwiftMigration = 1430;
 					};
 				};
 			};
@@ -149,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F6FE2D82A469A8300D646CE /* Store.swift in Sources */,
+				1F1E981B2A511E3F006A7D39 /* nowplaying.mm in Sources */,
 				1F6FE2DA2A469B7500D646CE /* SettingView.swift in Sources */,
 				1F6FE2C92A468DFB00D646CE /* ProcessReporterApp.swift in Sources */,
 				1F6FE2DE2A46F5CA00D646CE /* Reporter.swift in Sources */,
@@ -277,6 +290,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ProcessReporter/ProcessReporter.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -294,6 +308,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dev.innei.ProcessReporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ProcessReporter/ProcessReporter-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -303,6 +319,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ProcessReporter/ProcessReporter.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -320,6 +337,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dev.innei.ProcessReporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ProcessReporter/ProcessReporter-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
