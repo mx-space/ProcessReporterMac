@@ -126,10 +126,14 @@ class Reporter {
 
         if let info = infoFromOC {
             let arr = info.split(separator: "\n")
-            if arr.count < 2 {
+            let filterArr = arr.filter { sub in
+                sub != "null"
+            }
+            
+            if filterArr.count < 2 {
                 return nil
             }
-            let mediaInfo = MediaInfo(title: String(arr[0]), artist: String(arr[1]))
+            let mediaInfo = MediaInfo(title: String(filterArr[0]), artist: String(filterArr[1]))
 
             return mediaInfo
         }
