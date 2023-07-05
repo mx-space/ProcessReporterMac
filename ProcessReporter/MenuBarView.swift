@@ -22,6 +22,7 @@ struct MenuBarView: View {
             .keyboardShortcut("S")
 
             Button("Setting") {
+                NSApplication.shared.activate(ignoringOtherApps: true)
                 Reporter.shared.setting()
             }
             .keyboardShortcut(".", modifiers: .command)

@@ -26,12 +26,18 @@ struct swiftui_menu_barApp: App {
         }
     }
 
+    #if DEBUG
+    let systemImage = "trash.slash.fill"
+    #else
+    let systemImage = "arrow.clockwise.icloud"
+    #endif
+    
     var body: some Scene {
         Settings {
             SettingView().environmentObject(store)
         }
 
-        MenuBarExtra("sync", systemImage: "arrow.clockwise.icloud") {
+        MenuBarExtra("sync", systemImage: systemImage) {
             MenuBarView().environmentObject(store)
         }
 //        .menuBarExtraStyle(.window)

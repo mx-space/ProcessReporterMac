@@ -20,6 +20,7 @@ class Reporter {
         timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
 
             debugPrint("上报数据")
+            
             let mediaInfo = self.getCurrnetPlaying()
 
             let endpoint = Store.shared.endpoint

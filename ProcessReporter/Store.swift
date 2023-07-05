@@ -9,9 +9,13 @@ import Foundation
 
 class Store: ObservableObject {
     init() {
+//        #if DEBUG
         let apiKey = (UserDefaults.standard.string(forKey: "apiKey")) ?? ""
         let endpoint = UserDefaults.standard.string(forKey: "endpoint") ?? ""
-
+//        #else
+//        let apiKey = "testing"
+//        let endpoint = "http://127.0.0.1:2333/fn/ps/update"
+//        #endif
         self.apiKey = apiKey
         self.endpoint = endpoint
     }

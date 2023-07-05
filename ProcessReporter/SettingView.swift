@@ -17,7 +17,7 @@ struct SettingView: View {
     var body: some View {
         TabView {
             Form {
-                TextField("API Key", text: $store.apiKey)
+                SecureField("API Key", text: $store.apiKey)
                 TextField("Endpoint", text: $store.endpoint)
             }
             .padding(20)
