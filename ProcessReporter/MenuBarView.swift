@@ -28,7 +28,9 @@ struct MenuBarView: View {
             .keyboardShortcut(".", modifiers: .command)
 
             Divider()
-
+            #if DEBUG
+            Text("IN DEBUG MODE")
+            #endif
             Button("Quit") {
                 NSApplication.shared.terminate(nil)
 

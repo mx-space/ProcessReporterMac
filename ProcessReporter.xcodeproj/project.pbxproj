@@ -15,6 +15,7 @@
 		1F6FE2DA2A469B7500D646CE /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6FE2D92A469B7500D646CE /* SettingView.swift */; };
 		1F6FE2DC2A469C6300D646CE /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6FE2DB2A469C6300D646CE /* MenuBarView.swift */; };
 		1F6FE2DE2A46F5CA00D646CE /* Reporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6FE2DD2A46F5CA00D646CE /* Reporter.swift */; };
+		1F7F712D2A596A3A007E60CD /* StatusBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7F712C2A596A3A007E60CD /* StatusBarManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		1F6FE2D92A469B7500D646CE /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		1F6FE2DB2A469C6300D646CE /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		1F6FE2DD2A46F5CA00D646CE /* Reporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reporter.swift; sourceTree = "<group>"; };
+		1F7F712C2A596A3A007E60CD /* StatusBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				1F6FE2C82A468DFB00D646CE /* ProcessReporterApp.swift */,
 				1F6FE2DB2A469C6300D646CE /* MenuBarView.swift */,
 				1F6FE2D92A469B7500D646CE /* SettingView.swift */,
+				1F7F712C2A596A3A007E60CD /* StatusBarManager.swift */,
 				1F6FE2DD2A46F5CA00D646CE /* Reporter.swift */,
 				1F1E981A2A511E3F006A7D39 /* nowplaying.mm */,
 				1F1E981F2A512183006A7D39 /* nowplaying.h */,
@@ -163,6 +166,7 @@
 				1F6FE2D82A469A8300D646CE /* Store.swift in Sources */,
 				1F1E981B2A511E3F006A7D39 /* nowplaying.mm in Sources */,
 				1F6FE2DA2A469B7500D646CE /* SettingView.swift in Sources */,
+				1F7F712D2A596A3A007E60CD /* StatusBarManager.swift in Sources */,
 				1F6FE2C92A468DFB00D646CE /* ProcessReporterApp.swift in Sources */,
 				1F6FE2DE2A46F5CA00D646CE /* Reporter.swift in Sources */,
 				1F6FE2DC2A469C6300D646CE /* MenuBarView.swift in Sources */,

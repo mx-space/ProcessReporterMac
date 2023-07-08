@@ -4,8 +4,8 @@
 //
 //  Created by Innei on 2023/6/24.
 //
+import Combine
 import SwiftUI
-
 /// NOTE:
 ///  create a menu bar app:
 ///  delete WindowGroup
@@ -18,26 +18,24 @@ struct swiftui_menu_barApp: App {
     @StateObject var store = Store.shared
 
     var reporter = Reporter.shared
+    var statusBarManager: StatusBarManager
+
     init() {
         if reporter.isInited() {
             reporter.startReporting()
         } else {
             reporter.setting()
         }
+
+        statusBarManager = StatusBarManager(store: Store.shared)
     }
 
-    #if DEBUG
-    let systemImage = "trash.slash.fill"
-    #else
-    let systemImage = "arrow.clockwise.icloud"
-    #endif
-    
     var body: some Scene {
         Settings {
             SettingView().environmentObject(store)
         }
 
-        MenuBarExtra("sync", systemImage: systemImage) {
+        MenuBarExtra("sync", systemImage: statusBarManager.statusBarIcon) {
             MenuBarView().environmentObject(store)
         }
 //        .menuBarExtraStyle(.window)
