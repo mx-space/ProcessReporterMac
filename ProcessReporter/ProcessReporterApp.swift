@@ -28,6 +28,7 @@ struct swiftui_menu_barApp: App {
         }
 
         statusBarManager = StatusBarManager(store: Store.shared)
+        
     }
 
     var body: some Scene {
