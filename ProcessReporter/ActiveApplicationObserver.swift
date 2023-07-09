@@ -21,7 +21,8 @@ class ActiveApplicationObserver {
             queue: nil,
             using: { notification in
                 if let app = notification.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication {
-                    print("Activated app: \(app.localizedName ?? "unknown")")
+                    let name = app.localizedName ?? "unknown"
+                    callback(name)
                 }
             })
     }

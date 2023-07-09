@@ -24,6 +24,8 @@ class Reporter {
         timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
             self?.report(nil)
         }
+        
+        self.report(nil)
     }
 
     func stopReporting() {
