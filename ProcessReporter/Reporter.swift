@@ -98,9 +98,9 @@ class Reporter {
 
     func setting() {
         if #available(macOS 13, *) {
-            NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+            NSApplication.shared.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
         } else {
-            NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
+            NSApplication.shared.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
         }
     }
 
