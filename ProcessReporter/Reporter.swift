@@ -36,7 +36,7 @@ class Reporter {
         timer = nil
     }
 
-    func setting() {
+    func openSetting() {
         if #available(macOS 13, *) {
             NSApplication.shared.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
         } else {

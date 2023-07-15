@@ -24,7 +24,7 @@ struct swiftui_menu_barApp: App {
         if reporter.isInited() {
             reporter.startReporting()
         } else {
-            reporter.setting()
+            reporter.openSetting()
         }
 
         statusBarManager = StatusBarManager(store: Store.shared)

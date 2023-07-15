@@ -12,6 +12,13 @@ let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as
 struct MenuBarView: View {
     @EnvironmentObject var store: Store
 
+    var isMediaReport: Binding<Bool> {
+        Binding<Bool>(
+            get: { store.reportType.contains(.media) },
+            set: { _ in store.reportType.addOrRemove(.media) }
+        )
+    }
+
     var body: some View {
         Group {
             Button(store.isReporting ? "Pause" : "Start") {
@@ -25,9 +32,13 @@ struct MenuBarView: View {
 
             Button("Setting") {
                 NSApplication.shared.activate(ignoringOtherApps: true)
-                Reporter.shared.setting()
+                Reporter.shared.openSetting()
             }
             .keyboardShortcut(".", modifiers: .command)
+
+            Divider()
+
+            Toggle("Report Media", isOn: isMediaReport)
 
             Divider()
             #if DEBUG
