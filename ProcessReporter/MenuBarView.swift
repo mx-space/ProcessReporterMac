@@ -12,10 +12,26 @@ let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as
 struct MenuBarView: View {
     @EnvironmentObject var store: Store
 
-    var isMediaReport: Binding<Bool> {
+    func bindingForReportType(_ reportType: ReportType) -> Binding<Bool> {
         Binding<Bool>(
-            get: { store.reportType.contains(.media) },
-            set: { _ in store.reportType.addOrRemove(.media) }
+            get: { store.reportType.contains(reportType) },
+            set: { _ in store.reportType.addOrRemove(reportType) }
+        )
+    }
+
+    var isMediaReport: Binding<Bool> { bindingForReportType(.media) }
+    var isProcessReport: Binding<Bool> { bindingForReportType(.process) }
+
+    var isAllReport: Binding<Bool> {
+        Binding<Bool>(
+            get: { store.reportType.contains(.media) && store.reportType.contains(.process) },
+            set: {
+                if $0 {
+                    store.reportType = [.media, .process]
+                } else {
+                    store.reportType = []
+                }
+            }
         )
     }
 
@@ -39,6 +55,8 @@ struct MenuBarView: View {
             Divider()
 
             Toggle("Report Media", isOn: isMediaReport)
+            Toggle("Report Process", isOn: isProcessReport)
+            Toggle("Report All", isOn: isAllReport)
 
             Divider()
             #if DEBUG

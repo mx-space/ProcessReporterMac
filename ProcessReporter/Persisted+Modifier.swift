@@ -8,9 +8,6 @@ import SwiftUI
 
 @propertyWrapper
 struct Persisted<Value: Codable> {
-     
-    
-    
     let key: String
     var value: Value?
 
@@ -36,7 +33,9 @@ struct Persisted<Value: Codable> {
             if let data = try? JSONEncoder().encode(newValue) {
                 UserDefaults.standard.set(data, forKey: key)
             }
+
             
+            // TODO 太耦合了
             Store.shared.objectWillChange.send()
         }
     }

@@ -10,9 +10,5 @@ import Foundation
 enum ReportType: String, Codable, CaseIterable {
     case media
     case process
-    case all
-
-    static var allCasesExceptAll: [ReportType] {
-        return allCases.filter { $0 != .all }
-    }
+    
 }

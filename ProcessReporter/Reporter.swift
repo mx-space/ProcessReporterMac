@@ -18,7 +18,10 @@ class Reporter {
         Store.shared.isReporting = true
 
         ActiveApplicationObserver.shared.observe { [weak self] name in guard let self else { return }
-            self.report(name)
+
+            if Store.shared.reportType.has(.process) {
+                self.report(name)
+            }
         }
 
         timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in guard let self else { return }
@@ -88,12 +91,23 @@ class Reporter {
         let timestamp = Date().timeIntervalSince1970
 
         var postData: [String: Any] = [
-            "process": processName,
             "timestamp": timestamp,
             "key": apiKey,
         ]
 
-        if let mediaInfo = mediaInfo {
+        let processEnabled = Store.shared.reportType.has(.process)
+        let mediaEnabled = Store.shared.reportType.has(.media)
+
+        if !processEnabled && !mediaEnabled {
+            debugPrint("There no info should update")
+            return
+        }
+
+        if processEnabled {
+            postData["process"] = processName
+        }
+
+        if mediaEnabled, let mediaInfo = mediaInfo {
             postData["media"] = [
                 "title": mediaInfo.title,
                 "artist": mediaInfo.artist,
