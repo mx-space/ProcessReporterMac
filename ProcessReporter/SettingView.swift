@@ -5,10 +5,12 @@
 //  Created by Innei on 2023/6/24.
 //
 
+import LaunchAtLogin
 import SwiftUI
 
 struct SettingView: View {
     @EnvironmentObject var store: Store
+    @State private var launchAtLogin = false
 
     private enum Tabs: Hashable {
         case general
@@ -17,6 +19,10 @@ struct SettingView: View {
     var body: some View {
         TabView {
             Form {
+                LaunchAtLogin.Toggle {
+                    Text("Launch at login")
+                }
+
                 SecureField("API Key", text: $store.apiKey)
                 TextField("Endpoint", text: $store.endpoint)
             }

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
+
 struct MenuBarView: View {
     @EnvironmentObject var store: Store
 
@@ -29,8 +31,11 @@ struct MenuBarView: View {
 
             Divider()
             #if DEBUG
-            Text("IN DEBUG MODE")
+                Text("IN DEBUG MODE")
             #endif
+
+            Text(buildNumber!)
+
             Button("Quit") {
                 NSApplication.shared.terminate(nil)
 

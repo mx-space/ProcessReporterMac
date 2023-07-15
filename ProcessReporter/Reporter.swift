@@ -17,22 +17,22 @@ class Reporter {
     func startReporting() {
         Store.shared.isReporting = true
 
-        ActiveApplicationObserver.shared.observe { [weak self] name in
-            self?.report(name)
+        ActiveApplicationObserver.shared.observe { [weak self] name in guard let self else { return }
+            self.report(name)
         }
 
-        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
-            self?.report(nil)
+        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in guard let self else { return }
+            self.report(nil)
         }
-        
-        self.report(nil)
+
+        report(nil)
     }
 
     func stopReporting() {
         Store.shared.isReporting = false
         ActiveApplicationObserver.shared.dispose()
         timer?.invalidate()
-        
+
         timer = nil
     }
 
@@ -60,19 +60,19 @@ class Reporter {
 
         if endpoint == "" {
             debugPrint("endpoint not define")
-            self.stopReporting()
+            stopReporting()
             return
         }
 
         if apiKey == "" {
             debugPrint("apiKey not define")
-            self.stopReporting()
+            stopReporting()
             return
         }
 
         let url = URL(string: endpoint)
 
-        guard url != nil else {
+        guard let url else {
             debugPrint("endpoint parsing error")
             Store.shared.isReporting = false
             return
@@ -80,7 +80,7 @@ class Reporter {
 
         let workspace = NSWorkspace.shared
         let processName = currentFrontmostApp ?? workspace.frontmostApplication?.localizedName
-        guard processName != nil else {
+        guard let processName else {
             debugPrint("app unkown")
             return
         }
@@ -88,7 +88,7 @@ class Reporter {
         let timestamp = Date().timeIntervalSince1970
 
         var postData: [String: Any] = [
-            "process": processName ?? "",
+            "process": processName,
             "timestamp": timestamp,
             "key": apiKey,
         ]
@@ -100,7 +100,7 @@ class Reporter {
             ]
         }
 
-        var request = URLRequest(url: url!)
+        var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try? JSONSerialization.data(withJSONObject: postData)
