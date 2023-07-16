@@ -1,0 +1,50 @@
+name: Build
+on:
+  push:
+    branches:
+      - '**'
+    paths-ignore:
+      - 'LICENSE'
+      - '**.md'
+  pull_request:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+permissions:
+  write-all
+
+jobs:
+  build-mac:
+    name: Build for macOS (Universal)
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Xcode
+        shell: bash
+        run: |
+          xcode-select --install
+      - name: Build for macOS (Universal)
+        shell: bash
+        run: |
+          xcodebuild -project 'ProcessReporterMac.xcodeproj' -scheme 'ProcessReporterMac' -configuration 'Release' -destination 'platform=macOS' build
+      - name: Create DMG
+        shell: bash
+        run: |
+          hdiutil create -volname "ProcessReporter" -srcfolder "build/Release/ProcessReporter.app" -ov -format UDZO "ProcessReporter.dmg"
+      - name: Upload DMG Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ProcessReporter.dmg
+          path: ProcessReporter.dmg
+      - name: Upload DMG to GitHub Release
+        if: github.event_name == 'release'
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ProcessReporter.dmg
+          asset_name: ProcessReporter.dmg
+          asset_content_type: application/x-apple-diskimage
