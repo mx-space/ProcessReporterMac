@@ -17,11 +17,5 @@ extension Array where Element: Equatable {
             append(element)
         }
     }
-    
-    func has(_ element: Element) -> Bool {
-        if let index = firstIndex(of: element) {
-            return true
-        }
-        return false
-    }
+   
 }

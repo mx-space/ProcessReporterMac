@@ -5,6 +5,7 @@
 //  Created by Innei on 2023/6/24.
 //
 
+import LaunchAtLogin
 import SwiftUI
 
 let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
@@ -19,8 +20,8 @@ struct MenuBarView: View {
         )
     }
 
-    var isMediaReport: Binding<Bool> { bindingForReportType(.media) }
-    var isProcessReport: Binding<Bool> { bindingForReportType(.process) }
+    var isMediaReport: Binding<Bool> { bindingForReportType(ReportType.media) }
+    var isProcessReport: Binding<Bool> { bindingForReportType(ReportType.process) }
 
     var isAllReport: Binding<Bool> {
         Binding<Bool>(
@@ -37,38 +38,50 @@ struct MenuBarView: View {
 
     var body: some View {
         Group {
-            Button(store.isReporting ? "Pause" : "Start") {
-                if store.isReporting {
-                    Reporter.shared.stopReporting()
-                } else {
-                    Reporter.shared.startReporting()
+            Group {
+                Button(store.isReporting ? "Pause" : "Start") {
+                    if store.isReporting {
+                        Reporter.shared.stopReporting()
+                    } else {
+                        Reporter.shared.startReporting()
+                    }
                 }
-            }
-            .keyboardShortcut("S")
+                .keyboardShortcut("S")
 
-            Button("Setting") {
-                NSApplication.shared.activate(ignoringOtherApps: true)
-                Reporter.shared.openSetting()
+                Button("Setting") {
+                    NSApplication.shared.activate(ignoringOtherApps: true)
+                    Reporter.shared.openSetting()
+                }
+                .keyboardShortcut(".", modifiers: .command)
             }
-            .keyboardShortcut(".", modifiers: .command)
 
             Divider()
 
-            Toggle("Report Media", isOn: isMediaReport)
-            Toggle("Report Process", isOn: isProcessReport)
-            Toggle("Report All", isOn: isAllReport)
+            Group {
+                Toggle("Report Media", isOn: isMediaReport)
+                Toggle("Report Process", isOn: isProcessReport)
+                Toggle("Report All", isOn: isAllReport)
+            }
+
+            Divider()
+
+            LaunchAtLogin.Toggle {
+                Text("Launch at login")
+            }
 
             Divider()
             #if DEBUG
                 Text("IN DEBUG MODE")
             #endif
 
-            Text(buildNumber!)
+            Group {
+                Text(buildNumber!)
 
-            Button("Quit") {
-                NSApplication.shared.terminate(nil)
+                Button("Quit") {
+                    NSApplication.shared.terminate(nil)
 
-            }.keyboardShortcut("q")
+                }.keyboardShortcut("q")
+            }
         }
     }
 }

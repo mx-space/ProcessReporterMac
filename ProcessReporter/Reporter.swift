@@ -19,7 +19,7 @@ class Reporter {
 
         ActiveApplicationObserver.shared.observe { [weak self] name in guard let self else { return }
 
-            if Store.shared.reportType.has(.process) {
+            if Store.shared.reportType.contains(.process) {
                 self.report(name)
             }
         }
@@ -95,8 +95,8 @@ class Reporter {
             "key": apiKey,
         ]
 
-        let processEnabled = Store.shared.reportType.has(.process)
-        let mediaEnabled = Store.shared.reportType.has(.media)
+        let processEnabled = Store.shared.reportType.contains(.process)
+        let mediaEnabled = Store.shared.reportType.contains(.media)
 
         if !processEnabled && !mediaEnabled {
             debugPrint("There no info should update")
