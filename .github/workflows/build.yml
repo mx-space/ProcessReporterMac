@@ -24,7 +24,7 @@ jobs:
       - name: Build for macOS (Universal)
         shell: bash
         run: |
-          xcodebuild -project 'ProcessReporterMac.xcodeproj' -scheme 'ProcessReporterMac' -configuration 'Release' -destination 'platform=macOS' build
+          xcodebuild -project 'ProcessReporter.xcodeproj' -scheme 'ProcessReporter' -configuration 'Release' -destination 'platform=macOS' build
       - name: Create DMG
         shell: bash
         run: |
