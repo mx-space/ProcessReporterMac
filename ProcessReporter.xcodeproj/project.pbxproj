@@ -12,9 +12,9 @@
 		1F04C2242A63CB7B002FE62F /* ReportTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04C2232A63CB7B002FE62F /* ReportTypeView.swift */; };
 		1F04C2262A63CBED002FE62F /* ReportInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04C2252A63CBED002FE62F /* ReportInfoView.swift */; };
 		1F04C2282A63D4B9002FE62F /* BaseSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04C2272A63D4B9002FE62F /* BaseSettingView.swift */; };
+		1F04C22C2A63E5A2002FE62F /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 1F04C22B2A63E5A2002FE62F /* LaunchAtLogin */; };
 		1F1E981B2A511E3F006A7D39 /* nowplaying.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E981A2A511E3F006A7D39 /* nowplaying.mm */; };
 		1F3BE35F2A62F13D0059A818 /* Agent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3BE35E2A62F13D0059A818 /* Agent.swift */; };
-		1F3BE3652A62F8C30059A818 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 1F3BE3642A62F8C30059A818 /* LaunchAtLogin */; };
 		1F3BE3672A62FA910059A818 /* ReportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3BE3662A62FA910059A818 /* ReportType.swift */; };
 		1F3BE3692A62FB220059A818 /* Persisted+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3BE3682A62FB220059A818 /* Persisted+Modifier.swift */; };
 		1F3BE36B2A62FED80059A818 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3BE36A2A62FED80059A818 /* Array+Extension.swift */; };
@@ -34,6 +34,7 @@
 		1F04C2232A63CB7B002FE62F /* ReportTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTypeView.swift; sourceTree = "<group>"; };
 		1F04C2252A63CBED002FE62F /* ReportInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportInfoView.swift; sourceTree = "<group>"; };
 		1F04C2272A63D4B9002FE62F /* BaseSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSettingView.swift; sourceTree = "<group>"; };
+		1F04C2292A63E391002FE62F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1F1E98192A511E3F006A7D39 /* ProcessReporter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProcessReporter-Bridging-Header.h"; sourceTree = "<group>"; };
 		1F1E981A2A511E3F006A7D39 /* nowplaying.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = nowplaying.mm; sourceTree = "<group>"; };
 		1F1E981C2A511E7C006A7D39 /* Enums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Enums.h; sourceTree = "<group>"; };
@@ -61,8 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F04C22C2A63E5A2002FE62F /* LaunchAtLogin in Frameworks */,
 				1F04C2222A63C81B002FE62F /* SwiftJotai in Frameworks */,
-				1F3BE3652A62F8C30059A818 /* LaunchAtLogin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +96,7 @@
 		1F6FE2BC2A468DFB00D646CE = {
 			isa = PBXGroup;
 			children = (
+				1F04C2292A63E391002FE62F /* README.md */,
 				1F6FE2C72A468DFB00D646CE /* ProcessReporter */,
 				1F6FE2C62A468DFB00D646CE /* Products */,
 			);
@@ -156,8 +158,8 @@
 			);
 			name = ProcessReporter;
 			packageProductDependencies = (
-				1F3BE3642A62F8C30059A818 /* LaunchAtLogin */,
 				1F04C2212A63C81B002FE62F /* SwiftJotai */,
+				1F04C22B2A63E5A2002FE62F /* LaunchAtLogin */,
 			);
 			productName = ProcessReporter;
 			productReference = 1F6FE2C52A468DFB00D646CE /* ProcessReporter.app */;
@@ -189,8 +191,8 @@
 			);
 			mainGroup = 1F6FE2BC2A468DFB00D646CE;
 			packageReferences = (
-				1F3BE3632A62F8C30059A818 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 				1F04C2202A63C81B002FE62F /* XCRemoteSwiftPackageReference "SwiftJotai" */,
+				1F04C22A2A63E5A2002FE62F /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
 			);
 			productRefGroup = 1F6FE2C62A468DFB00D646CE /* Products */;
 			projectDirPath = "";
@@ -374,7 +376,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.innei.ProcessReporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -405,7 +407,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.innei.ProcessReporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -446,9 +448,9 @@
 				kind = branch;
 			};
 		};
-		1F3BE3632A62F8C30059A818 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+		1F04C22A2A63E5A2002FE62F /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -462,9 +464,9 @@
 			package = 1F04C2202A63C81B002FE62F /* XCRemoteSwiftPackageReference "SwiftJotai" */;
 			productName = SwiftJotai;
 		};
-		1F3BE3642A62F8C30059A818 /* LaunchAtLogin */ = {
+		1F04C22B2A63E5A2002FE62F /* LaunchAtLogin */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1F3BE3632A62F8C30059A818 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			package = 1F04C22A2A63E5A2002FE62F /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */;
 			productName = LaunchAtLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
