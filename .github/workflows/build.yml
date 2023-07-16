@@ -21,10 +21,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup Xcode
-        shell: bash
-        run: |
-          xcode-select --install
       - name: Build for macOS (Universal)
         shell: bash
         run: |
