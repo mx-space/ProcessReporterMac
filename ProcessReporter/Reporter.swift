@@ -114,24 +114,7 @@ class Reporter {
             ]
         }
 
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONSerialization.data(withJSONObject: postData)
-
-        let session = URLSession.shared
-
-        let task = session.dataTask(with: request) { _, _, error in
-
-            debugPrint(postData)
-            if let error = error {
-                debugPrint("发生错误：\(error)")
-            } else {
-                debugPrint("请求成功")
-            }
-        }
-
-        task.resume()
+        try? Request.shared.post(url: url, data: postData)
     }
 
     func getCurrnetPlaying() -> MediaInfo? {
