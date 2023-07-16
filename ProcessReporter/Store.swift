@@ -8,13 +8,9 @@
 import Foundation
 
 class Store: ObservableObject {
-    @Persisted("apiKey")  var apiKey: String = ""
-
-    @Persisted("endpoint")  var endpoint: String = ""
-
+    @Persisted("apiKey") var apiKey: String = ""
+    @Persisted("endpoint") var endpoint: String = ""
     @Persisted("reportType") var reportType: [ReportType] = [.media, .process]
-
-    @Published var isReporting = false
 
     public static let shared = Store()
 }

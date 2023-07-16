@@ -5,6 +5,7 @@
 //  Created by Innei on 2023/6/24.
 //
 import Combine
+import SwiftJotai
 import SwiftUI
 /// NOTE:
 ///  create a menu bar app:
@@ -16,9 +17,9 @@ import SwiftUI
 struct swiftui_menu_barApp: App {
     @Environment(\.openWindow) var openWindow
     @StateObject var store = Store.shared
+    @StateObject var isReporting = AtomValue(isReportingAtom)
 
     var reporter = Reporter.shared
-    var statusBarManager: StatusBarManager
 
     init() {
         if reporter.isInited() {
@@ -26,9 +27,10 @@ struct swiftui_menu_barApp: App {
         } else {
             reporter.openSetting()
         }
-
-        statusBarManager = StatusBarManager(store: Store.shared)
         
+        ActiveApplicationObserver.shared.observe { name in
+            JotaiStore.shared.set(currentFrontAppAtom, value: name)
+        }
     }
 
     var body: some Scene {
@@ -36,7 +38,7 @@ struct swiftui_menu_barApp: App {
             SettingView().environmentObject(store)
         }
 
-        MenuBarExtra("sync", systemImage: statusBarManager.statusBarIcon) {
+        MenuBarExtra("sync", systemImage: isReporting.value ? "arrow.clockwise.icloud" : "cloud") {
             MenuBarView().environmentObject(store)
         }
 //        .menuBarExtraStyle(.window)

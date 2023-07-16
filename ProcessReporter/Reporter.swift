@@ -6,34 +6,66 @@
 //
 
 import AppKit
-import MediaPlayer
-import ScriptingBridge
+import SwiftJotai
 
 class Reporter {
     public static var shared = Reporter()
 
+    private var disposeReporingSub: Disposable?
+    init() {
+        disposeReporingSub = JotaiStore.shared.subscribe(atom: isReportingAtom) { [weak self] in
+            let isReporting = JotaiStore.shared.get(isReportingAtom)
+            debugPrint("isReporting: \(isReporting)")
+            if isReporting {
+                self?.startReporting()
+            } else {
+                self?.stopReporting()
+            }
+        }
+    }
+
+    deinit {
+        disposeReporingSub?.dispose()
+    }
+
     var timer: Timer?
+    var subscribleDisposer: Disposable?
+
+    private let lock = DispatchSemaphore(value: 1)
 
     func startReporting() {
-        Store.shared.isReporting = true
+        lock.wait() // 请求锁
+        defer {
+            lock.signal()
+        }
 
-        ActiveApplicationObserver.shared.observe { [weak self] name in guard let self else { return }
+        debugPrint("startReporting")
+        if timer != nil {
+            debugPrint("is already reporting")
+            return
+        }
 
+        DispatchQueue.main.async {
+            JotaiStore.shared.set(isReportingAtom, value: true)
+        }
+
+        subscribleDisposer = JotaiStore.shared.subscribe(atom: currentFrontAppAtom) {
             if Store.shared.reportType.contains(.process) {
-                self.report(name)
+                self.report()
             }
         }
 
         timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in guard let self else { return }
-            self.report(nil)
+            self.report()
         }
 
-        report(nil)
+        report()
     }
 
     func stopReporting() {
-        Store.shared.isReporting = false
-        ActiveApplicationObserver.shared.dispose()
+        JotaiStore.shared.set(isReportingAtom, value: false)
+
+        subscribleDisposer?.dispose()
         timer?.invalidate()
 
         timer = nil
@@ -51,9 +83,13 @@ class Reporter {
         return Store.shared.apiKey != "" && Store.shared.apiKey != ""
     }
 
-    public func report(
-        _ currentFrontmostApp: String?
-    ) {
+    private func report() {
+        let shouldReport = JotaiStore.shared.get(isReportingAtom)
+        if !shouldReport {
+            debugPrint("Report is disabled.")
+            return
+        }
+
         debugPrint("上报数据")
 
         let mediaInfo = getCurrnetPlaying()
@@ -77,23 +113,21 @@ class Reporter {
 
         guard let url else {
             debugPrint("endpoint parsing error")
-            Store.shared.isReporting = false
+            JotaiStore.shared.set(isReportingAtom, value: false)
             return
         }
 
         let workspace = NSWorkspace.shared
-        let processName = currentFrontmostApp ?? workspace.frontmostApplication?.localizedName
+        let processName = workspace.frontmostApplication?.localizedName
         guard let processName else {
             debugPrint("app unkown")
             return
         }
 
-        let timestamp = Date().timeIntervalSince1970
+        let now = Date()
+        let timestamp: Int = Int(now.timeIntervalSince1970)
 
-        var postData: [String: Any] = [
-            "timestamp": timestamp,
-            "key": apiKey,
-        ]
+        var postData: PostData = PostData(timestamp: timestamp, key: apiKey)
 
         let processEnabled = Store.shared.reportType.contains(.process)
         let mediaEnabled = Store.shared.reportType.contains(.media)
@@ -104,17 +138,19 @@ class Reporter {
         }
 
         if processEnabled {
-            postData["process"] = processName
+            postData.process = processName
         }
 
         if mediaEnabled, let mediaInfo = mediaInfo {
-            postData["media"] = [
-                "title": mediaInfo.title,
-                "artist": mediaInfo.artist,
-            ]
+            postData.media = mediaInfo
         }
 
-        try? Request.shared.post(url: url, data: postData)
+        try? Request.shared.post(url: url, data: postData) { _ in
+            DispatchQueue.main.async {
+                JotaiStore.shared.set(lastReportAtAtom, value: now)
+                JotaiStore.shared.set(lastReportDataAtom, value: postData)
+            }
+        }
     }
 
     func getCurrnetPlaying() -> MediaInfo? {
@@ -149,12 +185,16 @@ class Reporter {
         }
         return nil
     }
-
-    func getMusicApp() {
-    }
 }
 
-struct MediaInfo {
+struct MediaInfo: Codable, Equatable {
     var title: String
     var artist: String
+}
+
+struct PostData: Codable, Equatable {
+    var timestamp: Int
+    var key: String
+    var process: String?
+    var media: MediaInfo?
 }

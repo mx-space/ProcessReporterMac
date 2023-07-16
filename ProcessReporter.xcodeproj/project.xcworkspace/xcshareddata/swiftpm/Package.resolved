@@ -8,6 +8,15 @@
         "branch" : "main",
         "revision" : "7ad6331f9c38953eb1ce8737758e18f7607e984a"
       }
+    },
+    {
+      "identity" : "swiftjotai",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/unixzii/SwiftJotai",
+      "state" : {
+        "branch" : "main",
+        "revision" : "7334d30a59abc36fbbb820eae607dc2197c90379"
+      }
     }
   ],
   "version" : 2

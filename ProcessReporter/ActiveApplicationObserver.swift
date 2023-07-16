@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import SwiftJotai
 
 class ActiveApplicationObserver {
     private var observer: NSObjectProtocol?
