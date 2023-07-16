@@ -9,9 +9,9 @@ import SwiftJotai
 import SwiftUI
 
 struct ReportInfoView: View {
-    @StateObject var lastReportAt = AtomValue(lastReportAtAtom)
-    @StateObject var lastReportData = AtomValue(lastReportDataAtom)
-    @StateObject var currentProcess = AtomValue(currentFrontAppAtom)
+    @StateObject var lastReportAt = AtomValue(Atoms.lastReportAtAtom)
+    @StateObject var lastReportData = AtomValue(Atoms.lastReportDataAtom)
+    @StateObject var currentProcess = AtomValue(Atoms.currentFrontAppAtom)
 
     var body: some View {
         Group {

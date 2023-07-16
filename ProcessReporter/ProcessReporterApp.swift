@@ -17,7 +17,7 @@ import SwiftUI
 struct swiftui_menu_barApp: App {
     @Environment(\.openWindow) var openWindow
     @StateObject var store = Store.shared
-    @StateObject var isReporting = AtomValue(isReportingAtom)
+    @StateObject var isReporting = AtomValue(Atoms.isReportingAtom)
 
     var reporter = Reporter.shared
 
@@ -29,7 +29,7 @@ struct swiftui_menu_barApp: App {
         }
         
         ActiveApplicationObserver.shared.observe { name in
-            JotaiStore.shared.set(currentFrontAppAtom, value: name)
+            JotaiStore.shared.set(Atoms.currentFrontAppAtom, value: name)
         }
     }
 

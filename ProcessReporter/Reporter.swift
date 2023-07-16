@@ -8,13 +8,14 @@
 import AppKit
 import SwiftJotai
 
+@MainActor
 class Reporter {
     public static var shared = Reporter()
 
     private var disposeReporingSub: Disposable?
     init() {
-        disposeReporingSub = JotaiStore.shared.subscribe(atom: isReportingAtom) { [weak self] in
-            let isReporting = JotaiStore.shared.get(isReportingAtom)
+        disposeReporingSub = JotaiStore.shared.subscribe(atom: Atoms.isReportingAtom) { [weak self] in
+            let isReporting = JotaiStore.shared.get(Atoms.isReportingAtom)
             debugPrint("isReporting: \(isReporting)")
             if isReporting {
                 self?.startReporting()
@@ -34,7 +35,7 @@ class Reporter {
     private let lock = DispatchSemaphore(value: 1)
 
     func startReporting() {
-        lock.wait() // 请求锁
+        lock.wait()
         defer {
             lock.signal()
         }
@@ -46,24 +47,28 @@ class Reporter {
         }
 
         DispatchQueue.main.async {
-            JotaiStore.shared.set(isReportingAtom, value: true)
+            JotaiStore.shared.set(Atoms.isReportingAtom, value: true)
         }
 
-        subscribleDisposer = JotaiStore.shared.subscribe(atom: currentFrontAppAtom) {
+        subscribleDisposer = JotaiStore.shared.subscribe(atom: Atoms.currentFrontAppAtom) {
             if Store.shared.reportType.contains(.process) {
                 self.report()
             }
         }
 
-        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in guard let self else { return }
-            self.report()
+        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+            Task {
+                await MainActor.run {
+                    self.report()
+                }
+            }
         }
 
         report()
     }
 
     func stopReporting() {
-        JotaiStore.shared.set(isReportingAtom, value: false)
+        JotaiStore.shared.set(Atoms.isReportingAtom, value: false)
 
         subscribleDisposer?.dispose()
         timer?.invalidate()
@@ -84,7 +89,7 @@ class Reporter {
     }
 
     private func report() {
-        let shouldReport = JotaiStore.shared.get(isReportingAtom)
+        let shouldReport = JotaiStore.shared.get(Atoms.isReportingAtom)
         if !shouldReport {
             debugPrint("Report is disabled.")
             return
@@ -113,7 +118,7 @@ class Reporter {
 
         guard let url else {
             debugPrint("endpoint parsing error")
-            JotaiStore.shared.set(isReportingAtom, value: false)
+            JotaiStore.shared.set(Atoms.isReportingAtom, value: false)
             return
         }
 
@@ -147,8 +152,8 @@ class Reporter {
 
         try? Request.shared.post(url: url, data: postData) { _ in
             DispatchQueue.main.async {
-                JotaiStore.shared.set(lastReportAtAtom, value: now)
-                JotaiStore.shared.set(lastReportDataAtom, value: postData)
+                JotaiStore.shared.set(Atoms.lastReportAtAtom, value: now)
+                JotaiStore.shared.set(Atoms.lastReportDataAtom, value: postData)
             }
         }
     }

@@ -11,19 +11,11 @@ import SwiftUI
 struct BaseSettingView: View {
     @EnvironmentObject var store: Store
 
-    @StateObject var isReporting = AtomValue(isReportingAtom)
-
-    var isReportBinding: Binding<Bool> {
-        Binding<Bool>(get: {
-            isReporting.value
-        }) { value, _ in
-            JotaiStore.shared.set(isReportingAtom, value: value)
-        }
-    }
+    @StateObject var isReporting = AtomValue(Atoms.isReportingAtom)
 
     var body: some View {
         Group {
-            Toggle(isOn: isReportBinding, label: {
+            Toggle(isOn: isReporting.binding, label: {
                 Text("Enable")
             })
             .keyboardShortcut("S")

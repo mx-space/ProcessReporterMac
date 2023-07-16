@@ -7,11 +7,14 @@
 
 import SwiftJotai
 
-let isReportingAtom = Atom(false)
+@MainActor
+enum Atoms {
+    static let isReportingAtom = Atom(false)
 
-let lastReportAtAtom = Atom<Date?>(nil)
-let lastReportDataAtom = Atom<PostData?>(nil)
+    static let lastReportAtAtom = Atom<Date?>(nil)
+    static let lastReportDataAtom = Atom<PostData?>(nil)
 
-let currentFrontAppAtom = Atom<String?>(nil)
+    static let currentFrontAppAtom = Atom<String?>(nil)
+}
 
 let JotaiStore = SwiftJotai.Store.self
