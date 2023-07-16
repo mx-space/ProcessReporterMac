@@ -24,11 +24,11 @@ jobs:
       - name: Build for macOS (Universal)
         shell: bash
         run: |
-          xcodebuild -project 'ProcessReporter.xcodeproj' -scheme 'ProcessReporter' -configuration 'Release' -destination 'platform=macOS' build
+          xcodebuild -project 'ProcessReporter.xcodeproj' -scheme 'ProcessReporter' -configuration 'Release' -destination 'platform=macOS' build  -derivedDataPath 'build'
       - name: Create DMG
         shell: bash
         run: |
-          hdiutil create -volname "ProcessReporter" -srcfolder "build/Release/ProcessReporter.app" -ov -format UDZO "ProcessReporter.dmg"
+          hdiutil create -volname "ProcessReporter" -srcfolder "build/Build/Products/Release/ProcessReporter.app" -ov -format UDZO "ProcessReporter.dmg"
       - name: Upload DMG Artifact
         uses: actions/upload-artifact@v2
         with:
