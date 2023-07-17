@@ -12,9 +12,10 @@ import SwiftJotai
 class Reporter {
     public static var shared = Reporter()
 
-    private var disposeReporingSub: Disposable?
+//    private var disposeReporingSub: Disposable?
+    private var disposerList = [Disposable]()
     init() {
-        disposeReporingSub = JotaiStore.shared.subscribe(atom: Atoms.isReportingAtom) { [weak self] in
+        let d1 = JotaiStore.shared.subscribe(atom: Atoms.isReportingAtom) { [weak self] in
             let isReporting = JotaiStore.shared.get(Atoms.isReportingAtom)
             debugPrint("isReporting: \(isReporting)")
             if isReporting {
@@ -23,10 +24,24 @@ class Reporter {
                 self?.stopReporting()
             }
         }
+
+        let d2 = JotaiStore.shared.subscribe(atom: Atoms.updateIntervalAtom) { [weak self] in
+            guard let self = self else { return }
+            guard let timer = self.timer else { return }
+            let isReporting = JotaiStore.shared.get(Atoms.isReportingAtom)
+            if !isReporting {
+                return
+            }
+            self.stopReporting()
+
+            self.startReporting()
+        }
+
+        disposerList.append(contentsOf: [d1, d2])
     }
 
     deinit {
-        disposeReporingSub?.dispose()
+        disposerList.forEach { $0.dispose() }
     }
 
     var timer: Timer?
@@ -56,7 +71,9 @@ class Reporter {
             }
         }
 
-        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+        let interval = TimeInterval(JotaiStore.shared.get(Atoms.updateIntervalAtom))
+
+        timer = Timer.scheduledTimer(withTimeInterval: max(interval, 1.0), repeats: true) { _ in
             Task {
                 await MainActor.run {
                     self.report()
@@ -85,7 +102,17 @@ class Reporter {
     }
 
     func isInited() -> Bool {
-        return Store.shared.apiKey != "" && Store.shared.apiKey != ""
+        let apiKey = getApiKey()
+        let endpoint = getEndpoint()
+        return apiKey != "" && endpoint != ""
+    }
+
+    private func getApiKey() -> String {
+        JotaiStore.shared.get(Atoms.apiKeyAtom)
+    }
+
+    private func getEndpoint() -> String {
+        JotaiStore.shared.get(Atoms.endpointAtom)
     }
 
     private func report() {
@@ -99,8 +126,8 @@ class Reporter {
 
         let mediaInfo = getCurrnetPlaying()
 
-        let endpoint = Store.shared.endpoint
-        let apiKey = Store.shared.apiKey
+        let endpoint = getEndpoint()
+        let apiKey = getApiKey()
 
         if endpoint == "" {
             debugPrint("endpoint not define")

@@ -15,6 +15,11 @@ enum Atoms {
     static let lastReportDataAtom = Atom<PostData?>(nil)
 
     static let currentFrontAppAtom = Atom<String?>(nil)
+
+    static let updateIntervalAtom = Atom(userDefaultsKey: "update-interval", defaultValue: 60)
+
+    static let apiKeyAtom = Atom(userDefaultsKey: "apiKey", defaultValue: "")
+    static let endpointAtom = Atom(userDefaultsKey: "endpoint", defaultValue: "")
 }
 
 let JotaiStore = SwiftJotai.Store.self
