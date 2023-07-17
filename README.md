@@ -29,6 +29,10 @@ This project uses the following open-source libraries:
 
 Process Reporter for Shiro is an open-source project, and we welcome contributions from anyone. If you have any issues or suggestions, feel free to submit an issue or pull request.
 
+## Other Platform
+
+- [Linux](https://github.com/ttimochan/processforlinux)
+
 ## License
 
 Process Reporter for Shiro is licensed under the MIT License. For details, please see the LICENSE file.
