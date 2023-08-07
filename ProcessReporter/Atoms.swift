@@ -20,6 +20,8 @@ enum Atoms {
 
     static let apiKeyAtom = Atom(userDefaultsKey: "apiKey", defaultValue: "")
     static let endpointAtom = Atom(userDefaultsKey: "endpoint", defaultValue: "")
+    
+    static let networkOnlineAtom = Atom(true)
 }
 
 let JotaiStore = SwiftJotai.Store.self

@@ -22,7 +22,7 @@ struct BaseSettingView: View {
 
             Button("Setting") {
                 NSApplication.shared.activate(ignoringOtherApps: true)
-                Reporter.shared.openSetting()
+                Application.openSetting()
             }
             .keyboardShortcut(".", modifiers: .command)
         }

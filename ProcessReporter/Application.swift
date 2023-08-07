@@ -32,7 +32,15 @@ enum Application {
                 }
             }
 
-            JotaiStore.shared.set(Atoms.excludedAppNamesAtom, value: appDisplayNames)
+//            JotaiStore.shared.set(Atoms.excludedAppNamesAtom, value: appDisplayNames)
+        }
+    }
+
+    static func openSetting() {
+        if #available(macOS 13, *) {
+            NSApplication.shared.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+        } else {
+            NSApplication.shared.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
         }
     }
 }

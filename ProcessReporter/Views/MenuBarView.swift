@@ -12,20 +12,31 @@ import SwiftUI
 let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
 
 struct MenuBarView: View {
+    @StateObject var networkOnline = AtomValue(Atoms.networkOnlineAtom)
+
     var body: some View {
         Group {
-            BaseSettingView()
+            Group {
+                if networkOnline.value == false {
+                    Text("You are offline")
+                    Divider()
+                }
+            }
 
             Group {
-                Divider()
+                BaseSettingView()
 
-                ReportTypeView()
+                Group {
+                    Divider()
 
-                Divider()
+                    ReportTypeView()
 
-                ReportInfoView()
-                Divider()
-            }
+                    Divider()
+
+                    ReportInfoView()
+                    Divider()
+                }
+            }.disabled(networkOnline.value == false)
 
             LaunchAtLogin.Toggle {
                 Text("Launch at login")

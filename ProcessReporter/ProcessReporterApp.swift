@@ -18,6 +18,7 @@ struct swiftui_menu_barApp: App {
     @Environment(\.openWindow) var openWindow
     @StateObject var store = Store.shared
     @StateObject var isReporting = AtomValue(Atoms.isReportingAtom)
+    @StateObject var networkOnline = AtomValue(Atoms.networkOnlineAtom)
 
     var reporter = Reporter.shared
 
@@ -25,12 +26,18 @@ struct swiftui_menu_barApp: App {
         if reporter.isInited() {
             reporter.startReporting()
         } else {
-            reporter.openSetting()
+            Application.openSetting()
         }
-        
+
         ActiveApplicationObserver.shared.observe { name in
             JotaiStore.shared.set(Atoms.currentFrontAppAtom, value: name)
         }
+    }
+
+    var menuIcon: String {
+        return isReporting.value ?
+            networkOnline.value ? "arrow.clockwise.icloud" : "xmark.icloud"
+            : "cloud"
     }
 
     var body: some Scene {
@@ -38,7 +45,7 @@ struct swiftui_menu_barApp: App {
             SettingView().environmentObject(store)
         }
 
-        MenuBarExtra("sync", systemImage: isReporting.value ? "arrow.clockwise.icloud" : "cloud") {
+        MenuBarExtra("sync", systemImage: menuIcon) {
             MenuBarView().environmentObject(store)
         }
 //        .menuBarExtraStyle(.window)

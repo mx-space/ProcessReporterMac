@@ -6,14 +6,41 @@
 //
 
 import AppKit
+import Network
 import SwiftJotai
+
+fileprivate enum NetworkObserver {
+    static let monitor = NWPathMonitor()
+    static let queue = DispatchQueue(label: "NetworkMonitor")
+
+    static func observe(
+        onConnect: (() -> Void)? = nil,
+        onDisconnect: (() -> Void)? = nil
+    ) {
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                debugPrint("We're connected!")
+                onConnect?()
+            } else {
+                debugPrint("No connection.")
+                onDisconnect?()
+            }
+        }
+
+        monitor.start(queue: queue)
+    }
+
+    static func getCurrentNetworkStatus() -> NWPath.Status {
+        return monitor.currentPath.status
+    }
+}
 
 @MainActor
 class Reporter {
     public static var shared = Reporter()
 
-//    private var disposeReporingSub: Disposable?
     private var disposerList = [Disposable]()
+
     init() {
         let d1 = JotaiStore.shared.subscribe(atom: Atoms.isReportingAtom) { [weak self] in
             let isReporting = JotaiStore.shared.get(Atoms.isReportingAtom)
@@ -27,7 +54,7 @@ class Reporter {
 
         let d2 = JotaiStore.shared.subscribe(atom: Atoms.updateIntervalAtom) { [weak self] in
             guard let self = self else { return }
-            guard let timer = self.timer else { return }
+            guard self.timer != nil else { return }
             let isReporting = JotaiStore.shared.get(Atoms.isReportingAtom)
             if !isReporting {
                 return
@@ -38,6 +65,22 @@ class Reporter {
         }
 
         disposerList.append(contentsOf: [d1, d2])
+
+        // detect network
+        let networkStatus = NetworkObserver.getCurrentNetworkStatus()
+        switch networkStatus {
+        case .satisfied:
+            JotaiStore.shared.set(Atoms.networkOnlineAtom, value: true)
+        case .requiresConnection, .unsatisfied:
+            JotaiStore.shared.set(Atoms.networkOnlineAtom, value: false)
+        @unknown default: JotaiStore.shared.set(Atoms.networkOnlineAtom, value: false)
+        }
+
+        NetworkObserver.observe {
+            JotaiStore.shared.set(Atoms.networkOnlineAtom, value: true)
+        } onDisconnect: {
+            JotaiStore.shared.set(Atoms.networkOnlineAtom, value: false)
+        }
     }
 
     deinit {
@@ -93,14 +136,6 @@ class Reporter {
         timer = nil
     }
 
-    func openSetting() {
-        if #available(macOS 13, *) {
-            NSApplication.shared.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
-        } else {
-            NSApplication.shared.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
-        }
-    }
-
     func isInited() -> Bool {
         let apiKey = getApiKey()
         let endpoint = getEndpoint()
@@ -119,6 +154,13 @@ class Reporter {
         let shouldReport = JotaiStore.shared.get(Atoms.isReportingAtom)
         if !shouldReport {
             debugPrint("Report is disabled.")
+            return
+        }
+
+        let isOnline = JotaiStore.shared.get(Atoms.networkOnlineAtom)
+
+        if !isOnline {
+            debugPrint("Network offline")
             return
         }
 
