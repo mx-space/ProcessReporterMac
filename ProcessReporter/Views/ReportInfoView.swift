@@ -13,6 +13,8 @@ struct ReportInfoView: View {
     @StateObject var lastReportData = AtomValue(Atoms.lastReportDataAtom)
     @StateObject var currentProcess = AtomValue(Atoms.currentFrontAppAtom)
 
+    let formatter = RelativeDateTimeFormatter()
+
     var body: some View {
         Group {
             Section("Current Process") {
@@ -29,7 +31,11 @@ struct ReportInfoView: View {
                     }
 
                     if let lastReportTime = lastReportAt.value {
-                        Button("Last Report At: \(lastReportTime.formatted(.dateTime.hour().minute().second()))") {}
+                        Button(action: {}) {
+//                            Text("Last Report At: \(formatter.localizedString(for: lastReportTime, relativeTo: Date.now))")
+
+                            Text(lastReportTime, style: .relative)
+                        }
                     }
                 }
             }

@@ -26,6 +26,7 @@
 		1F6FE2DA2A469B7500D646CE /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6FE2D92A469B7500D646CE /* SettingView.swift */; };
 		1F6FE2DC2A469C6300D646CE /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6FE2DB2A469C6300D646CE /* MenuBarView.swift */; };
 		1F6FE2DE2A46F5CA00D646CE /* Reporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6FE2DD2A46F5CA00D646CE /* Reporter.swift */; };
+		1FAAEC482A66702100C086FF /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAAEC472A66702100C086FF /* Application.swift */; };
 		1FFC0FC52A5AE4FE00F67585 /* ActiveApplicationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC0FC42A5AE4FE00F67585 /* ActiveApplicationObserver.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,8 @@
 		1F6FE2D92A469B7500D646CE /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		1F6FE2DB2A469C6300D646CE /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		1F6FE2DD2A46F5CA00D646CE /* Reporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reporter.swift; sourceTree = "<group>"; };
+		1FAAEC462A666ED800C086FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1FAAEC472A66702100C086FF /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		1FFC0FC42A5AE4FE00F67585 /* ActiveApplicationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveApplicationObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,11 +116,13 @@
 		1F6FE2C72A468DFB00D646CE /* ProcessReporter */ = {
 			isa = PBXGroup;
 			children = (
+				1FAAEC462A666ED800C086FF /* Info.plist */,
 				1F04C21A2A63C003002FE62F /* PlayingBridage */,
 				1F3BE3702A63B3AA0059A818 /* Views */,
 				1F6FE2C82A468DFB00D646CE /* ProcessReporterApp.swift */,
 				1F3BE36A2A62FED80059A818 /* Array+Extension.swift */,
 				1F3BE35E2A62F13D0059A818 /* Agent.swift */,
+				1FAAEC472A66702100C086FF /* Application.swift */,
 				1F04C21B2A63C068002FE62F /* Atoms.swift */,
 				1F6FE2DD2A46F5CA00D646CE /* Reporter.swift */,
 				1F3BE36E2A63B3220059A818 /* Request.swift */,
@@ -222,6 +227,7 @@
 			files = (
 				1F6FE2D82A469A8300D646CE /* Store.swift in Sources */,
 				1F3BE36F2A63B3220059A818 /* Request.swift in Sources */,
+				1FAAEC482A66702100C086FF /* Application.swift in Sources */,
 				1F04C2242A63CB7B002FE62F /* ReportTypeView.swift in Sources */,
 				1F3BE3672A62FA910059A818 /* ReportType.swift in Sources */,
 				1F04C2282A63D4B9002FE62F /* BaseSettingView.swift in Sources */,
@@ -368,6 +374,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ProcessReporter/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ProcessReporter/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -399,6 +407,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ProcessReporter/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ProcessReporter/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
