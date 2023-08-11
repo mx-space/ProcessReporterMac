@@ -18,8 +18,12 @@ enum Atoms {
 
     static let updateIntervalAtom = Atom(userDefaultsKey: "update-interval", defaultValue: 60)
 
+    // API Report
     static let apiKeyAtom = Atom(userDefaultsKey: "apiKey", defaultValue: "")
     static let endpointAtom = Atom(userDefaultsKey: "endpoint", defaultValue: "")
+    
+    // Slack report
+    static let slackApiTokenAtom = Atom(userDefaultsKey: "slack_token", defaultValue: "")
     
     static let networkOnlineAtom = Atom(true)
 }

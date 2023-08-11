@@ -28,6 +28,7 @@
 		1F6FE2DE2A46F5CA00D646CE /* Reporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6FE2DD2A46F5CA00D646CE /* Reporter.swift */; };
 		1FAAEC482A66702100C086FF /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAAEC472A66702100C086FF /* Application.swift */; };
 		1FBAFA042A815AA200425224 /* RelativeTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBAFA032A815AA200425224 /* RelativeTimeView.swift */; };
+		1FF3ED2B2A8692A900EEF21D /* IntergrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3ED2A2A8692A900EEF21D /* IntergrationView.swift */; };
 		1FFC0FC52A5AE4FE00F67585 /* ActiveApplicationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC0FC42A5AE4FE00F67585 /* ActiveApplicationObserver.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		1FAAEC462A666ED800C086FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1FAAEC472A66702100C086FF /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		1FBAFA032A815AA200425224 /* RelativeTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeTimeView.swift; sourceTree = "<group>"; };
+		1FF3ED2A2A8692A900EEF21D /* IntergrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntergrationView.swift; sourceTree = "<group>"; };
 		1FFC0FC42A5AE4FE00F67585 /* ActiveApplicationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveApplicationObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +94,7 @@
 				1F6FE2DB2A469C6300D646CE /* MenuBarView.swift */,
 				1F04C2272A63D4B9002FE62F /* BaseSettingView.swift */,
 				1F6FE2D92A469B7500D646CE /* SettingView.swift */,
+				1FF3ED2A2A8692A900EEF21D /* IntergrationView.swift */,
 				1F04C2232A63CB7B002FE62F /* ReportTypeView.swift */,
 				1F04C2252A63CBED002FE62F /* ReportInfoView.swift */,
 			);
@@ -251,6 +254,7 @@
 				1F04C2262A63CBED002FE62F /* ReportInfoView.swift in Sources */,
 				1F04C21C2A63C068002FE62F /* Atoms.swift in Sources */,
 				1F6FE2DA2A469B7500D646CE /* SettingView.swift in Sources */,
+				1FF3ED2B2A8692A900EEF21D /* IntergrationView.swift in Sources */,
 				1F6FE2C92A468DFB00D646CE /* ProcessReporterApp.swift in Sources */,
 				1F6FE2DE2A46F5CA00D646CE /* Reporter.swift in Sources */,
 				1F6FE2DC2A469C6300D646CE /* MenuBarView.swift in Sources */,
