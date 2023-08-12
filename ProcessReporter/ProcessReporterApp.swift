@@ -23,7 +23,9 @@ struct swiftui_menu_barApp: App {
     var reporter = Reporter.shared
 
     init() {
-        if reporter.isInited() {
+        NotificationManager.requestNotificationAuthorization()
+
+        if JotaiStore.shared.get(Atoms.isReportingAtom) {
             reporter.startReporting()
         } else {
             Application.openSetting()

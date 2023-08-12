@@ -13,6 +13,11 @@
 		1F04C2262A63CBED002FE62F /* ReportInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04C2252A63CBED002FE62F /* ReportInfoView.swift */; };
 		1F04C2282A63D4B9002FE62F /* BaseSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04C2272A63D4B9002FE62F /* BaseSettingView.swift */; };
 		1F04C22C2A63E5A2002FE62F /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 1F04C22B2A63E5A2002FE62F /* LaunchAtLogin */; };
+		1F1DA6BE2A875EDE0076B77F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DA6BD2A875EDE0076B77F /* NotificationManager.swift */; };
+		1F1DA6C02A8764290076B77F /* Reporter+Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DA6BF2A8764290076B77F /* Reporter+Media.swift */; };
+		1F1DA6C22A87644F0076B77F /* Reporter+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DA6C12A87644F0076B77F /* Reporter+API.swift */; };
+		1F1DA6C82A8767550076B77F /* Reporter+Slack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DA6C72A8767550076B77F /* Reporter+Slack.swift */; };
+		1F1DA6CA2A876C740076B77F /* Reporter+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DA6C92A876C740076B77F /* Reporter+Formatter.swift */; };
 		1F1E981B2A511E3F006A7D39 /* nowplaying.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E981A2A511E3F006A7D39 /* nowplaying.mm */; };
 		1F3BE35F2A62F13D0059A818 /* Agent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3BE35E2A62F13D0059A818 /* Agent.swift */; };
 		1F3BE3672A62FA910059A818 /* ReportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3BE3662A62FA910059A818 /* ReportType.swift */; };
@@ -28,6 +33,10 @@
 		1F6FE2DE2A46F5CA00D646CE /* Reporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6FE2DD2A46F5CA00D646CE /* Reporter.swift */; };
 		1FAAEC482A66702100C086FF /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAAEC472A66702100C086FF /* Application.swift */; };
 		1FBAFA042A815AA200425224 /* RelativeTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBAFA032A815AA200425224 /* RelativeTimeView.swift */; };
+		1FF3ED2B2A8692A900EEF21D /* IntergrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3ED2A2A8692A900EEF21D /* IntergrationView.swift */; };
+		1FF3ED2E2A8732AA00EEF21D /* ApiIntegrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3ED2D2A8732AA00EEF21D /* ApiIntegrationView.swift */; };
+		1FF3ED302A8732C600EEF21D /* SlackIntegrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3ED2F2A8732C600EEF21D /* SlackIntegrationView.swift */; };
+		1FF3ED322A8738D600EEF21D /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3ED312A8738D600EEF21D /* Defaults.swift */; };
 		1FFC0FC52A5AE4FE00F67585 /* ActiveApplicationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC0FC42A5AE4FE00F67585 /* ActiveApplicationObserver.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +46,11 @@
 		1F04C2252A63CBED002FE62F /* ReportInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportInfoView.swift; sourceTree = "<group>"; };
 		1F04C2272A63D4B9002FE62F /* BaseSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSettingView.swift; sourceTree = "<group>"; };
 		1F04C2292A63E391002FE62F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1F1DA6BD2A875EDE0076B77F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		1F1DA6BF2A8764290076B77F /* Reporter+Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reporter+Media.swift"; sourceTree = "<group>"; };
+		1F1DA6C12A87644F0076B77F /* Reporter+API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reporter+API.swift"; sourceTree = "<group>"; };
+		1F1DA6C72A8767550076B77F /* Reporter+Slack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reporter+Slack.swift"; sourceTree = "<group>"; };
+		1F1DA6C92A876C740076B77F /* Reporter+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reporter+Formatter.swift"; sourceTree = "<group>"; };
 		1F1E98192A511E3F006A7D39 /* ProcessReporter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProcessReporter-Bridging-Header.h"; sourceTree = "<group>"; };
 		1F1E981A2A511E3F006A7D39 /* nowplaying.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = nowplaying.mm; sourceTree = "<group>"; };
 		1F1E981C2A511E7C006A7D39 /* Enums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Enums.h; sourceTree = "<group>"; };
@@ -59,6 +73,10 @@
 		1FAAEC462A666ED800C086FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1FAAEC472A66702100C086FF /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		1FBAFA032A815AA200425224 /* RelativeTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeTimeView.swift; sourceTree = "<group>"; };
+		1FF3ED2A2A8692A900EEF21D /* IntergrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntergrationView.swift; sourceTree = "<group>"; };
+		1FF3ED2D2A8732AA00EEF21D /* ApiIntegrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiIntegrationView.swift; sourceTree = "<group>"; };
+		1FF3ED2F2A8732C600EEF21D /* SlackIntegrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackIntegrationView.swift; sourceTree = "<group>"; };
+		1FF3ED312A8738D600EEF21D /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		1FFC0FC42A5AE4FE00F67585 /* ActiveApplicationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveApplicationObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,14 +104,76 @@
 			path = PlayingBridage;
 			sourceTree = "<group>";
 		};
-		1F3BE3702A63B3AA0059A818 /* Views */ = {
+		1F1DA6C32A8764F80076B77F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1FAAEC472A66702100C086FF /* Application.swift */,
+				1F1DA6BD2A875EDE0076B77F /* NotificationManager.swift */,
+				1FFC0FC42A5AE4FE00F67585 /* ActiveApplicationObserver.swift */,
+				1F3BE35E2A62F13D0059A818 /* Agent.swift */,
+				1F3BE36E2A63B3220059A818 /* Request.swift */,
+				1F6FE2D72A469A8300D646CE /* Store.swift */,
+				1F3BE3682A62FB220059A818 /* Persisted+Modifier.swift */,
+				1F1DA6C42A8765000076B77F /* Reporter */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		1F1DA6C42A8765000076B77F /* Reporter */ = {
+			isa = PBXGroup;
+			children = (
+				1F6FE2DD2A46F5CA00D646CE /* Reporter.swift */,
+				1F1DA6C12A87644F0076B77F /* Reporter+API.swift */,
+				1F1DA6C72A8767550076B77F /* Reporter+Slack.swift */,
+				1F1DA6C92A876C740076B77F /* Reporter+Formatter.swift */,
+				1F1DA6BF2A8764290076B77F /* Reporter+Media.swift */,
+			);
+			path = Reporter;
+			sourceTree = "<group>";
+		};
+		1F1DA6C52A87652F0076B77F /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				1FF3ED312A8738D600EEF21D /* Defaults.swift */,
+				1F3BE3662A62FA910059A818 /* ReportType.swift */,
+				1F04C21B2A63C068002FE62F /* Atoms.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		1F1DA6C62A8765470076B77F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1F3BE36A2A62FED80059A818 /* Array+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1F1DA6CB2A8778370076B77F /* Menu */ = {
 			isa = PBXGroup;
 			children = (
 				1F6FE2DB2A469C6300D646CE /* MenuBarView.swift */,
-				1F04C2272A63D4B9002FE62F /* BaseSettingView.swift */,
-				1F6FE2D92A469B7500D646CE /* SettingView.swift */,
 				1F04C2232A63CB7B002FE62F /* ReportTypeView.swift */,
 				1F04C2252A63CBED002FE62F /* ReportInfoView.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		1F1DA6CC2A87784C0076B77F /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				1F04C2272A63D4B9002FE62F /* BaseSettingView.swift */,
+				1F6FE2D92A469B7500D646CE /* SettingView.swift */,
+				1FF3ED2C2A87329800EEF21D /* Intergration */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		1F3BE3702A63B3AA0059A818 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1F1DA6CC2A87784C0076B77F /* Setting */,
+				1F1DA6CB2A8778370076B77F /* Menu */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -118,21 +198,14 @@
 		1F6FE2C72A468DFB00D646CE /* ProcessReporter */ = {
 			isa = PBXGroup;
 			children = (
+				1F1DA6C62A8765470076B77F /* Extensions */,
+				1F1DA6C52A87652F0076B77F /* Constants */,
+				1F1DA6C32A8764F80076B77F /* Utils */,
 				1FBAFA022A815A9500425224 /* Components */,
 				1FAAEC462A666ED800C086FF /* Info.plist */,
 				1F04C21A2A63C003002FE62F /* PlayingBridage */,
 				1F3BE3702A63B3AA0059A818 /* Views */,
 				1F6FE2C82A468DFB00D646CE /* ProcessReporterApp.swift */,
-				1F3BE36A2A62FED80059A818 /* Array+Extension.swift */,
-				1F3BE35E2A62F13D0059A818 /* Agent.swift */,
-				1FAAEC472A66702100C086FF /* Application.swift */,
-				1F04C21B2A63C068002FE62F /* Atoms.swift */,
-				1F6FE2DD2A46F5CA00D646CE /* Reporter.swift */,
-				1F3BE36E2A63B3220059A818 /* Request.swift */,
-				1F6FE2D72A469A8300D646CE /* Store.swift */,
-				1F3BE3682A62FB220059A818 /* Persisted+Modifier.swift */,
-				1F3BE3662A62FA910059A818 /* ReportType.swift */,
-				1FFC0FC42A5AE4FE00F67585 /* ActiveApplicationObserver.swift */,
 				1F1E98192A511E3F006A7D39 /* ProcessReporter-Bridging-Header.h */,
 				1F6FE2CC2A468DFC00D646CE /* Assets.xcassets */,
 				1F6FE2D12A468DFC00D646CE /* ProcessReporter.entitlements */,
@@ -155,6 +228,16 @@
 				1FBAFA032A815AA200425224 /* RelativeTimeView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		1FF3ED2C2A87329800EEF21D /* Intergration */ = {
+			isa = PBXGroup;
+			children = (
+				1FF3ED2A2A8692A900EEF21D /* IntergrationView.swift */,
+				1FF3ED2D2A8732AA00EEF21D /* ApiIntegrationView.swift */,
+				1FF3ED2F2A8732C600EEF21D /* SlackIntegrationView.swift */,
+			);
+			path = Intergration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,11 +320,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F6FE2D82A469A8300D646CE /* Store.swift in Sources */,
+				1FF3ED322A8738D600EEF21D /* Defaults.swift in Sources */,
 				1F3BE36F2A63B3220059A818 /* Request.swift in Sources */,
 				1FBAFA042A815AA200425224 /* RelativeTimeView.swift in Sources */,
 				1FAAEC482A66702100C086FF /* Application.swift in Sources */,
 				1F04C2242A63CB7B002FE62F /* ReportTypeView.swift in Sources */,
 				1F3BE3672A62FA910059A818 /* ReportType.swift in Sources */,
+				1F1DA6C82A8767550076B77F /* Reporter+Slack.swift in Sources */,
 				1F04C2282A63D4B9002FE62F /* BaseSettingView.swift in Sources */,
 				1F1E981B2A511E3F006A7D39 /* nowplaying.mm in Sources */,
 				1F3BE36B2A62FED80059A818 /* Array+Extension.swift in Sources */,
@@ -251,9 +336,16 @@
 				1F04C2262A63CBED002FE62F /* ReportInfoView.swift in Sources */,
 				1F04C21C2A63C068002FE62F /* Atoms.swift in Sources */,
 				1F6FE2DA2A469B7500D646CE /* SettingView.swift in Sources */,
+				1FF3ED2B2A8692A900EEF21D /* IntergrationView.swift in Sources */,
+				1FF3ED2E2A8732AA00EEF21D /* ApiIntegrationView.swift in Sources */,
+				1F1DA6CA2A876C740076B77F /* Reporter+Formatter.swift in Sources */,
 				1F6FE2C92A468DFB00D646CE /* ProcessReporterApp.swift in Sources */,
+				1F1DA6C22A87644F0076B77F /* Reporter+API.swift in Sources */,
 				1F6FE2DE2A46F5CA00D646CE /* Reporter.swift in Sources */,
+				1FF3ED302A8732C600EEF21D /* SlackIntegrationView.swift in Sources */,
+				1F1DA6C02A8764290076B77F /* Reporter+Media.swift in Sources */,
 				1F6FE2DC2A469C6300D646CE /* MenuBarView.swift in Sources */,
+				1F1DA6BE2A875EDE0076B77F /* NotificationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

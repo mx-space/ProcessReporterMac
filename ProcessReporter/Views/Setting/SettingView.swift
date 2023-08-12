@@ -11,13 +11,12 @@ import SwiftJotai
 import SwiftUI
 
 struct SettingView: View {
-    @StateObject var apiKey = AtomValue(Atoms.apiKeyAtom)
-    @StateObject var endpoint = AtomValue(Atoms.endpointAtom)
     @State private var launchAtLogin = false
     @StateObject var updateInterval = AtomValue(Atoms.updateIntervalAtom)
 
     private enum Tabs: Hashable {
         case general
+        case integration
     }
 
     let numberFormatter: NumberFormatter = {
@@ -37,17 +36,20 @@ struct SettingView: View {
                 }
 
                 TextField("Report interval", value: updateInterval.binding, formatter: numberFormatter)
-
-                SecureField("API Key", text: apiKey.binding)
-                TextField("Endpoint", text: endpoint.binding)
             }
             .padding(20)
-            .frame(width: 350)
+
             .tabItem {
                 Label("General", systemImage: "gear")
             }
             .tag(Tabs.general)
-        }
+
+            IntergrationView()
+                .tabItem {
+                    Label("Integration", systemImage: "puzzlepiece.extension")
+                }
+                .tag(Tabs.integration)
+        }.frame(width: 500)
     }
 }
 

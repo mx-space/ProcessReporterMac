@@ -13,7 +13,9 @@ struct ReportInfoView: View {
     @StateObject var lastReportData = AtomValue(Atoms.lastReportDataAtom)
     @StateObject var currentProcess = AtomValue(Atoms.currentFrontAppAtom)
 
-    var body: some View {
+    @StateObject var lastSlackReportInfo = AtomValue(Atoms.lastSlackStatusAtom)
+
+    var APIView: some View {
         Group {
             Section("Current Process") {
                 Button(currentProcess.value ?? "N/A") {}
@@ -36,6 +38,23 @@ struct ReportInfoView: View {
                 }
             }
         }
+    }
+
+    var SlackView: some View {
+        Group {
+            if let lastSlackReportInfo = lastSlackReportInfo.value {
+                Group {
+                    Section("Slack Report") {
+                        Button("Last Status Change: " + lastSlackReportInfo) {}
+                    }
+                }
+            }
+        }
+    }
+
+    var body: some View {
+        APIView
+        SlackView
     }
 }
 
