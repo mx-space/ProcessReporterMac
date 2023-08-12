@@ -164,7 +164,7 @@
 			children = (
 				1F04C2272A63D4B9002FE62F /* BaseSettingView.swift */,
 				1F6FE2D92A469B7500D646CE /* SettingView.swift */,
-				1FF3ED2C2A87329800EEF21D /* Intergration */,
+				1FF3ED2C2A87329800EEF21D /* Integration */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -230,14 +230,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		1FF3ED2C2A87329800EEF21D /* Intergration */ = {
+		1FF3ED2C2A87329800EEF21D /* Integration */ = {
 			isa = PBXGroup;
 			children = (
 				1FF3ED2A2A8692A900EEF21D /* IntergrationView.swift */,
 				1FF3ED2D2A8732AA00EEF21D /* ApiIntegrationView.swift */,
 				1FF3ED2F2A8732C600EEF21D /* SlackIntegrationView.swift */,
 			);
-			path = Intergration;
+			path = Integration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +247,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F6FE2D42A468DFC00D646CE /* Build configuration list for PBXNativeTarget "ProcessReporter" */;
 			buildPhases = (
+				1F1DA6CD2A877BBE0076B77F /* ShellScript */,
 				1F6FE2C12A468DFB00D646CE /* Sources */,
 				1F6FE2C22A468DFB00D646CE /* Frameworks */,
 				1F6FE2C32A468DFB00D646CE /* Resources */,
@@ -313,6 +314,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1F1DA6CD2A877BBE0076B77F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Typgit=`sh /etc/profile; which git`\ngit=`sh /etc/profile; which git`\nappBuild=`$git rev-parse --short HEAD`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $appBuild\" \"${TARGET_BUILD_DIR}/${INFO_PLIST_PATH}\"\necho \"Updated ${TARGET_BUILD_DIR}/${INFO_PLIST_PATH}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1F6FE2C12A468DFB00D646CE /* Sources */ = {
@@ -488,7 +509,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.innei.ProcessReporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -521,7 +542,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.innei.ProcessReporter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

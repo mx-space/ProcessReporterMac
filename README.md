@@ -1,13 +1,20 @@
 #  Process Reporter
 
-Process Reporter for [Shiro](https://github.com/Innei/Shiro) is a macOS application built with Swift UI. It is designed to report in real time the name of the foreground application being used by the current user on macOS, as well as any media information being played.
+Process Reporter is a macOS application built with Swift UI. It is designed to report in real time the name of the foreground application being used by the current user on macOS, as well as any media information being played.
 
 ## Main Features
 
 - Real-time reporting of the foreground application being used by the current user
 - Real-time reporting of any media information being played by the current user
 
-This data is reported to our server, which then notifies users browsing the Shiro-built website in real time via WebSocket. This allows users to see their real-time activity on the website.
+## Integration
+
+- [Shiro](https://github.com/Innei/Shiro)
+
+    This data is reported to our server, which then notifies users browsing the Shiro-built website in real time via WebSocket. This allows users to see their real-time activity on the website.
+- Slack
+
+    Automatically update your profile to show the currently playing music or other content. Supports customizing profile text and emojis.
 
 ## How to Use
 

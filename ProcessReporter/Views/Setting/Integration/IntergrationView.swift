@@ -8,7 +8,7 @@
 import SwiftJotai
 import SwiftUI
 
-fileprivate enum IntergrationType: Hashable, CaseIterable {
+fileprivate enum IntegrationType: Hashable, CaseIterable {
     case api
     case slack
 
@@ -34,8 +34,8 @@ fileprivate enum IntergrationType: Hashable, CaseIterable {
 }
 
 fileprivate struct SidebarButtonView: View {
-    @Binding var currentSelectedIntergration: IntergrationType
-    var integration: IntergrationType
+    @Binding var currentSelectedIntergration: IntegrationType
+    var integration: IntegrationType
 
     var isSelected: Bool {
         return currentSelectedIntergration == integration
@@ -74,7 +74,7 @@ fileprivate struct SidebarButtonView: View {
 }
 
 struct IntergrationView: View {
-    @State fileprivate var currentSelectedIntergration = IntergrationType.api
+    @State fileprivate var currentSelectedIntergration = IntegrationType.api
 
     var body: some View {
         HStack {
