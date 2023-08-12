@@ -10,6 +10,12 @@ import SwiftJotai
 
 let stackEndpoint = "https://slack.com/api/users.profile.set"
 
+fileprivate struct ProfileData: Codable {
+    var status_text: String
+    var status_emoji: String
+    var status_expiration: Int
+}
+
 extension Reporter {
     public func slackStatusReport() {
         if !JotaiStore.shared.get(Atoms.slackReportEnabledAtom) {
@@ -28,10 +34,13 @@ extension Reporter {
         let statusText = stringFormatter(text: formatter)
         let statusEmoji = emoji.count > 0 ? String(emoji.first!) : ""
 
+        let statusExpiration = {
+            let currentDate = Date()
+            return Calendar.current.date(byAdding: .minute, value: 5, to: currentDate)!.timeIntervalSince1970
+        }()
+
         let postData = [
-            "profile": ["status_text": statusText,
-                        "status_emoji": statusEmoji,
-            ],
+            "profile":  ProfileData(status_text: statusText, status_emoji: statusEmoji, status_expiration: Int(statusExpiration)),
         ]
 
         let token = JotaiStore.shared.get(Atoms.slackApiTokenAtom)
