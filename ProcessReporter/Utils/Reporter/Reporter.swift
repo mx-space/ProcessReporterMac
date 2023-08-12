@@ -136,12 +136,6 @@ class Reporter {
         timer = nil
     }
 
-    func isInited() -> Bool {
-        let apiKey = getApiKey()
-        let endpoint = getEndpoint()
-        return apiKey != "" && endpoint != ""
-    }
-
     private func report() {
         let shouldReport = JotaiStore.shared.get(Atoms.isReportingAtom)
         if !shouldReport {
@@ -167,118 +161,6 @@ class Reporter {
         debugPrint("上报数据")
 
         apiReport()
-    }
-}
-
-struct MediaInfo: Codable, Equatable {
-    var title: String
-    var artist: String
-}
-
-struct PostData: Codable, Equatable {
-    var timestamp: Int
-    var key: String
-    var process: String?
-    var media: MediaInfo?
-}
-
-extension Reporter {
-    private func getApiKey() -> String {
-        JotaiStore.shared.get(Atoms.apiKeyAtom)
-    }
-
-    private func getEndpoint() -> String {
-        JotaiStore.shared.get(Atoms.endpointAtom)
-    }
-
-    public func apiReport() {
-        let endpoint = getEndpoint()
-        let apiKey = getApiKey()
-
-        if endpoint == "" {
-            debugPrint("endpoint not define")
-            stopReporting()
-            return
-        }
-
-        if apiKey == "" {
-            debugPrint("apiKey not define")
-            stopReporting()
-            return
-        }
-
-        let url = URL(string: endpoint)
-
-        guard let url else {
-            debugPrint("endpoint parsing error")
-            JotaiStore.shared.set(Atoms.isReportingAtom, value: false)
-            return
-        }
-
-        let workspace = NSWorkspace.shared
-        let processName = workspace.frontmostApplication?.localizedName
-        guard let processName else {
-            debugPrint("app unkown")
-            return
-        }
-
-        let now = Date()
-        let timestamp: Int = Int(now.timeIntervalSince1970)
-
-        var postData: PostData = PostData(timestamp: timestamp, key: apiKey)
-
-        let processEnabled = Store.shared.reportType.contains(.process)
-        let mediaEnabled = Store.shared.reportType.contains(.media)
-
-        if processEnabled {
-            postData.process = processName
-        }
-
-        let mediaInfo = getCurrnetPlaying()
-        if mediaEnabled, let mediaInfo = mediaInfo {
-            postData.media = mediaInfo
-        }
-
-        try? Request.shared.post(url: url, data: postData) { _ in
-            DispatchQueue.main.async {
-                JotaiStore.shared.set(Atoms.lastReportAtAtom, value: now)
-                JotaiStore.shared.set(Atoms.lastReportDataAtom, value: postData)
-            }
-        }
-    }
-}
-
-extension Reporter {
-    func getCurrnetPlaying() -> MediaInfo? {
-        let args: [String] = ["", "get", "title", "artist"]
-
-        var cArgs = args.map { $0.withCString(strdup) }
-        var infoFromOC: String?
-
-        cArgs.withUnsafeMutableBufferPointer { buffer in
-            let argc = Int32(buffer.count)
-            let argv = buffer.baseAddress
-
-            let result = NowPlaying.processCommand(withArgc: argc, argv: argv)
-
-            infoFromOC = result
-        }
-
-        for ptr in cArgs { free(ptr) }
-
-        if let info = infoFromOC {
-            let arr = info.split(separator: "\n")
-            let filterArr = arr.filter { sub in
-                sub != "null"
-            }
-
-            if filterArr.count < 2 {
-                return nil
-            }
-            let mediaInfo = MediaInfo(title: String(filterArr[0]), artist: String(filterArr[1]))
-
-            return mediaInfo
-        }
-        return nil
+        slackStatusReport()
     }
 }

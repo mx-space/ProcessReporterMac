@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum Constants {
-    enum SlackStatusDefault {
+enum Defaults {
+    enum SlackStatus {
         static let emoji = "🎧"
         static let formatter = "正在听 {media_name} - {media_artist}"
     }

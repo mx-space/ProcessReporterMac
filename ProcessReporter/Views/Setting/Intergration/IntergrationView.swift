@@ -21,11 +21,12 @@ fileprivate enum IntergrationType: Hashable, CaseIterable {
         }
     }
 
-    var customLogoImage: String {
+    
+    var customLogoImage: String  {
         switch self {
         case .slack:
             return "slack"
-
+            
         case .api:
             return "terminal"
         }
@@ -44,11 +45,13 @@ fileprivate struct SidebarButtonView: View {
 
     var body: some View {
         HStack {
+            
             Image(integration.customLogoImage)
-                .resizable() // 使图片可调整大小
-                .aspectRatio(contentMode: .fit) // 保持图片的宽高比
-                .frame(width: 30, height: 30) // 为图片设置尺寸
+                    .resizable() // 使图片可调整大小
+                    .aspectRatio(contentMode: .fit) // 保持图片的宽高比
+                    .frame(width: 30, height: 30) // 为图片设置尺寸
 
+            
             Text(integration.systemName)
                 .font(.body)
                 .bold()

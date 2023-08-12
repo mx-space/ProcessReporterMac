@@ -9,7 +9,6 @@ import Combine
 import SwiftJotai
 import SwiftUI
 
-// xoxp-1852632292756-5077140333767-5731875685667-fea8f993a5d01fe1c465f081c4660f36
 struct SlackIntegrationView: View {
     @State private var localToken: String
     @State private var localEmoji: String

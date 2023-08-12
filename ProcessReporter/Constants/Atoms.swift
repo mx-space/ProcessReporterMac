@@ -9,10 +9,7 @@ import SwiftJotai
 
 @MainActor
 enum Atoms {
-    static let isReportingAtom = Atom(false)
-
-    static let lastReportAtAtom = Atom<Date?>(nil)
-    static let lastReportDataAtom = Atom<PostData?>(nil)
+    static let isReportingAtom = Atom(userDefaultsKey: "enableAppReport", defaultValue: false)
 
     static let currentFrontAppAtom = Atom<String?>(nil)
 
@@ -22,14 +19,17 @@ enum Atoms {
     static let apiReportEnabledAtom = Atom(userDefaultsKey: "apiReportEnabled", defaultValue: true)
     static let apiKeyAtom = Atom(userDefaultsKey: "apiKey", defaultValue: "")
     static let endpointAtom = Atom(userDefaultsKey: "endpoint", defaultValue: "")
-    
+    static let lastReportAtAtom = Atom<Date?>(nil)
+    static let lastReportDataAtom = Atom<PostData?>(nil)
+
     // Slack report
     static let slackReportEnabledAtom = Atom(userDefaultsKey: "slackReportEnabled", defaultValue: true)
     static let slackApiTokenAtom = Atom(userDefaultsKey: "slack_token", defaultValue: "")
-    static let slackStatusEmojiAtom = Atom(userDefaultsKey: "slack_status_emoji", defaultValue: Constants.SlackStatusDefault.emoji)
+    static let slackStatusEmojiAtom = Atom(userDefaultsKey: "slack_status_emoji", defaultValue: Defaults.SlackStatus.emoji)
     static let slackStatusTextFormatterAtom = Atom(userDefaultsKey: "slack_status_formatter", defaultValue:
-                                                    Constants.SlackStatusDefault.formatter)
-    
+        Defaults.SlackStatus.formatter)
+    static let lastSlackStatusAtom = Atom<String?>(nil)
+
     static let networkOnlineAtom = Atom(true)
 }
 
