@@ -40,7 +40,7 @@ struct SlackIntegrationView: View {
 
             Divider()
 
-            TextField("API Token", text: $localToken, onCommit: {
+            SecureField("API Token", text: $localToken, onCommit: {
                 slackApiToken.value = localToken
             })
 
