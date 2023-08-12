@@ -86,11 +86,11 @@ extension Reporter {
             }
         }
 
-        try? Request.shared.post(url: url, data: postData) { _ in
+        try? Request.shared.post(url: url, data: postData, callback: { _ in
             DispatchQueue.main.async {
                 JotaiStore.shared.set(Atoms.lastReportAtAtom, value: now)
                 JotaiStore.shared.set(Atoms.lastReportDataAtom, value: postData)
             }
-        }
+        })
     }
 }
