@@ -29,6 +29,9 @@
 		1FAAEC482A66702100C086FF /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAAEC472A66702100C086FF /* Application.swift */; };
 		1FBAFA042A815AA200425224 /* RelativeTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBAFA032A815AA200425224 /* RelativeTimeView.swift */; };
 		1FF3ED2B2A8692A900EEF21D /* IntergrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3ED2A2A8692A900EEF21D /* IntergrationView.swift */; };
+		1FF3ED2E2A8732AA00EEF21D /* ApiIntegrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3ED2D2A8732AA00EEF21D /* ApiIntegrationView.swift */; };
+		1FF3ED302A8732C600EEF21D /* SlackIntegrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3ED2F2A8732C600EEF21D /* SlackIntegrationView.swift */; };
+		1FF3ED322A8738D600EEF21D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF3ED312A8738D600EEF21D /* Constants.swift */; };
 		1FFC0FC52A5AE4FE00F67585 /* ActiveApplicationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC0FC42A5AE4FE00F67585 /* ActiveApplicationObserver.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +64,9 @@
 		1FAAEC472A66702100C086FF /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		1FBAFA032A815AA200425224 /* RelativeTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeTimeView.swift; sourceTree = "<group>"; };
 		1FF3ED2A2A8692A900EEF21D /* IntergrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntergrationView.swift; sourceTree = "<group>"; };
+		1FF3ED2D2A8732AA00EEF21D /* ApiIntegrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiIntegrationView.swift; sourceTree = "<group>"; };
+		1FF3ED2F2A8732C600EEF21D /* SlackIntegrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackIntegrationView.swift; sourceTree = "<group>"; };
+		1FF3ED312A8738D600EEF21D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1FFC0FC42A5AE4FE00F67585 /* ActiveApplicationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveApplicationObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +97,7 @@
 		1F3BE3702A63B3AA0059A818 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1FF3ED2C2A87329800EEF21D /* Intergration */,
 				1F6FE2DB2A469C6300D646CE /* MenuBarView.swift */,
 				1F04C2272A63D4B9002FE62F /* BaseSettingView.swift */,
 				1F6FE2D92A469B7500D646CE /* SettingView.swift */,
@@ -129,6 +136,7 @@
 				1F3BE36A2A62FED80059A818 /* Array+Extension.swift */,
 				1F3BE35E2A62F13D0059A818 /* Agent.swift */,
 				1FAAEC472A66702100C086FF /* Application.swift */,
+				1FF3ED312A8738D600EEF21D /* Constants.swift */,
 				1F04C21B2A63C068002FE62F /* Atoms.swift */,
 				1F6FE2DD2A46F5CA00D646CE /* Reporter.swift */,
 				1F3BE36E2A63B3220059A818 /* Request.swift */,
@@ -158,6 +166,15 @@
 				1FBAFA032A815AA200425224 /* RelativeTimeView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		1FF3ED2C2A87329800EEF21D /* Intergration */ = {
+			isa = PBXGroup;
+			children = (
+				1FF3ED2D2A8732AA00EEF21D /* ApiIntegrationView.swift */,
+				1FF3ED2F2A8732C600EEF21D /* SlackIntegrationView.swift */,
+			);
+			path = Intergration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F6FE2D82A469A8300D646CE /* Store.swift in Sources */,
+				1FF3ED322A8738D600EEF21D /* Constants.swift in Sources */,
 				1F3BE36F2A63B3220059A818 /* Request.swift in Sources */,
 				1FBAFA042A815AA200425224 /* RelativeTimeView.swift in Sources */,
 				1FAAEC482A66702100C086FF /* Application.swift in Sources */,
@@ -255,8 +273,10 @@
 				1F04C21C2A63C068002FE62F /* Atoms.swift in Sources */,
 				1F6FE2DA2A469B7500D646CE /* SettingView.swift in Sources */,
 				1FF3ED2B2A8692A900EEF21D /* IntergrationView.swift in Sources */,
+				1FF3ED2E2A8732AA00EEF21D /* ApiIntegrationView.swift in Sources */,
 				1F6FE2C92A468DFB00D646CE /* ProcessReporterApp.swift in Sources */,
 				1F6FE2DE2A46F5CA00D646CE /* Reporter.swift in Sources */,
+				1FF3ED302A8732C600EEF21D /* SlackIntegrationView.swift in Sources */,
 				1F6FE2DC2A469C6300D646CE /* MenuBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

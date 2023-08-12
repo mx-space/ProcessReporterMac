@@ -142,14 +142,6 @@ class Reporter {
         return apiKey != "" && endpoint != ""
     }
 
-    private func getApiKey() -> String {
-        JotaiStore.shared.get(Atoms.apiKeyAtom)
-    }
-
-    private func getEndpoint() -> String {
-        JotaiStore.shared.get(Atoms.endpointAtom)
-    }
-
     private func report() {
         let shouldReport = JotaiStore.shared.get(Atoms.isReportingAtom)
         if !shouldReport {
@@ -164,10 +156,42 @@ class Reporter {
             return
         }
 
+        let processEnabled = Store.shared.reportType.contains(.process)
+        let mediaEnabled = Store.shared.reportType.contains(.media)
+
+        if !processEnabled && !mediaEnabled {
+            debugPrint("There no info should update")
+            return
+        }
+
         debugPrint("上报数据")
 
-        let mediaInfo = getCurrnetPlaying()
+        apiReport()
+    }
+}
 
+struct MediaInfo: Codable, Equatable {
+    var title: String
+    var artist: String
+}
+
+struct PostData: Codable, Equatable {
+    var timestamp: Int
+    var key: String
+    var process: String?
+    var media: MediaInfo?
+}
+
+extension Reporter {
+    private func getApiKey() -> String {
+        JotaiStore.shared.get(Atoms.apiKeyAtom)
+    }
+
+    private func getEndpoint() -> String {
+        JotaiStore.shared.get(Atoms.endpointAtom)
+    }
+
+    public func apiReport() {
         let endpoint = getEndpoint()
         let apiKey = getApiKey()
 
@@ -206,15 +230,11 @@ class Reporter {
         let processEnabled = Store.shared.reportType.contains(.process)
         let mediaEnabled = Store.shared.reportType.contains(.media)
 
-        if !processEnabled && !mediaEnabled {
-            debugPrint("There no info should update")
-            return
-        }
-
         if processEnabled {
             postData.process = processName
         }
 
+        let mediaInfo = getCurrnetPlaying()
         if mediaEnabled, let mediaInfo = mediaInfo {
             postData.media = mediaInfo
         }
@@ -226,7 +246,9 @@ class Reporter {
             }
         }
     }
+}
 
+extension Reporter {
     func getCurrnetPlaying() -> MediaInfo? {
         let args: [String] = ["", "get", "title", "artist"]
 
@@ -259,16 +281,4 @@ class Reporter {
         }
         return nil
     }
-}
-
-struct MediaInfo: Codable, Equatable {
-    var title: String
-    var artist: String
-}
-
-struct PostData: Codable, Equatable {
-    var timestamp: Int
-    var key: String
-    var process: String?
-    var media: MediaInfo?
 }

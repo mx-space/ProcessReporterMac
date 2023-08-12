@@ -8,18 +8,48 @@
 import SwiftJotai
 import SwiftUI
 
-struct SidebarButtonView: View {
-    var action: () -> Void
-    var systemName: String
-    var buttonText: String
+fileprivate enum IntergrationType: Hashable, CaseIterable {
+    case api
+    case slack
 
-    var isSelected: Bool
+    var systemName: String {
+        switch self {
+        case .api:
+            return "API"
+        case .slack:
+            return "Slack"
+        }
+    }
+
+    var customLogoImage: String {
+        switch self {
+        case .slack:
+            return "slack"
+
+        case .api:
+            return "terminal"
+        }
+    }
+}
+
+fileprivate struct SidebarButtonView: View {
+    @Binding var currentSelectedIntergration: IntergrationType
+    var integration: IntergrationType
+
+    var isSelected: Bool {
+        return currentSelectedIntergration == integration
+    }
+
+    var action: (() -> Void)? = nil
 
     var body: some View {
         HStack {
-            Image(systemName: systemName)
-           
-            Text(buttonText)
+            Image(integration.customLogoImage)
+                .resizable() // 使图片可调整大小
+                .aspectRatio(contentMode: .fit) // 保持图片的宽高比
+                .frame(width: 30, height: 30) // 为图片设置尺寸
+
+            Text(integration.systemName)
                 .font(.body)
                 .bold()
                 .fixedSize()
@@ -28,65 +58,45 @@ struct SidebarButtonView: View {
         .padding()
         .buttonStyle(BorderlessButtonStyle())
         .background(isSelected ? .blue : .clear)
+        .foregroundColor(isSelected ? .white : .primary)
         .cornerRadius(6)
         .frame(maxWidth: .infinity)
         .contentShape(Rectangle()) // 确保整个区域是可点击的
 
         .onTapGesture {
-            action()
+            currentSelectedIntergration = integration
+            action?()
         }
     }
 }
 
 struct IntergrationView: View {
-    @StateObject var apiKey = AtomValue(Atoms.apiKeyAtom)
-    @StateObject var endpoint = AtomValue(Atoms.endpointAtom)
-    
-    @StateObject var slackApiToken = AtomValue(Atoms.slackApiTokenAtom)
-
-    enum IntergrationType: Hashable, CaseIterable {
-        case api
-        case slack
-    }
-
-    @State var currentSelectedIntergration = IntergrationType.api
+    @State fileprivate var currentSelectedIntergration = IntergrationType.api
 
     var body: some View {
         HStack {
             VStack(spacing: 0) {
                 ScrollView {
-                    SidebarButtonView(action: {
-                                          currentSelectedIntergration = IntergrationType.api
-                                      },
-                                      systemName: "arrowtriangle.up",
-                                      buttonText: "API Report",
-                                      isSelected: currentSelectedIntergration == IntergrationType.api
-                    )
+                    SidebarButtonView(currentSelectedIntergration: $currentSelectedIntergration, integration: .api)
 
-                    SidebarButtonView(action: {
-                                          currentSelectedIntergration = IntergrationType.slack
-                                      },
-                                      systemName: "arrowtriangle.up",
-                                      buttonText: "Slack",
-                                      isSelected: currentSelectedIntergration == IntergrationType.slack
-                    )
+                    SidebarButtonView(currentSelectedIntergration: $currentSelectedIntergration, integration: .slack)
                 }
             }
-            .background(.green)
+            .background(.background)
             .frame(width: 120, height: 400)
 
-            HStack(alignment: .top) {
-                if currentSelectedIntergration == .api {
-                    Form {
-                        SecureField("API Key", text: apiKey.binding)
-                        TextField("Endpoint", text: endpoint.binding)
-                    }
-                } else if currentSelectedIntergration == .slack {
-                    Form {
-                        TextField("Slack API Token", text: slackApiToken.binding)
-                    }
-                }
+            VStack {
+                ScrollView {
+                    Group {
+                        if currentSelectedIntergration == .api {
+                            ApiIntegrationView()
+                        } else if currentSelectedIntergration == .slack {
+                            SlackIntegrationView()
+                        }
+                    }.padding(.vertical, 12)
 
+                    Spacer()
+                }
             }.padding()
         }
     }
