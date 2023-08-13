@@ -32,6 +32,11 @@ extension Reporter {
         let url = URL(string: stackEndpoint)!
 
         let statusText = stringFormatter(text: formatter)
+
+        guard let statusText = statusText else {
+            return
+        }
+
         let statusEmoji = emoji.count > 0 ? String(emoji.first!) : ""
 
         let statusExpiration = {
@@ -40,7 +45,7 @@ extension Reporter {
         }()
 
         let postData = [
-            "profile":  ProfileData(status_text: statusText, status_emoji: statusEmoji, status_expiration: Int(statusExpiration)),
+            "profile": ProfileData(status_text: statusText, status_emoji: statusEmoji, status_expiration: Int(statusExpiration)),
         ]
 
         let token = JotaiStore.shared.get(Atoms.slackApiTokenAtom)
