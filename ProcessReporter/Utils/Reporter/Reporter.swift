@@ -41,7 +41,29 @@ class Reporter {
 
     private var disposerList = [Disposable]()
 
+    private func sleepHandler() {
+        NotificationCenter.default.addObserver(self, selector: #selector(systemWillSleep), name: NSWorkspace.willSleepNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(systemDidWake), name: NSWorkspace.didWakeNotification, object: nil)
+    }
+
+    @objc func systemWillSleep(_ notification: Notification) {
+        if let timer = timer {
+            debugPrint("timer invalidate, sleeping")
+
+            timer.invalidate()
+        }
+    }
+
+    @objc func systemDidWake(_ notification: Notification) {
+        let isReporting = JotaiStore.shared.get(Atoms.isReportingAtom)
+        debugPrint("wake up, isReporting: \(isReporting)")
+        if isReporting {
+            startReporting()
+        }
+    }
+
     init() {
+        sleepHandler()
         let d1 = JotaiStore.shared.subscribe(atom: Atoms.isReportingAtom) { [weak self] in
             let isReporting = JotaiStore.shared.get(Atoms.isReportingAtom)
             debugPrint("isReporting: \(isReporting)")
@@ -158,7 +180,7 @@ class Reporter {
             return
         }
 
-        debugPrint("上报数据")
+//        debugPrint("上报数据")
 
         apiReport()
         slackStatusReport()

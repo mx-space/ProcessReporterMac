@@ -35,7 +35,7 @@ class Request {
                 debugPrint("发生错误：\(error)")
                 errorCallback?(error)
             } else {
-                debugPrint("请求成功 \(data)")
+//                debugPrint("请求成功 \(data)")
                 callback?(response)
             }
         }

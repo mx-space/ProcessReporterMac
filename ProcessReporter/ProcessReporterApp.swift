@@ -7,6 +7,10 @@
 import Combine
 import SwiftJotai
 import SwiftUI
+import Foundation
+
+
+
 /// NOTE:
 ///  create a menu bar app:
 ///  delete WindowGroup
@@ -23,6 +27,8 @@ struct swiftui_menu_barApp: App {
     var reporter = Reporter.shared
 
     init() {
+        ProcessInfo.processInfo.processName = "NewProcessName"
+        
         NotificationManager.requestNotificationAuthorization()
 
         if JotaiStore.shared.get(Atoms.isReportingAtom) {
