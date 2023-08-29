@@ -1,4 +1,4 @@
-#  Process Reporter
+# Process Reporter
 
 Process Reporter is a macOS application built with Swift UI. It is designed to report in real time the name of the foreground application being used by the current user on macOS, as well as any media information being played.
 
@@ -7,14 +7,17 @@ Process Reporter is a macOS application built with Swift UI. It is designed to r
 - Real-time reporting of the foreground application being used by the current user
 - Real-time reporting of any media information being played by the current user
 
+![](https://github.com/mx-space/ProcessReporterMac/assets/41265413/8987d41e-2f62-41d7-8bd5-f9aee2d9393f)
+
 ## Integration
 
 - [Shiro](https://github.com/Innei/Shiro)
 
-    This data is reported to our server, which then notifies users browsing the Shiro-built website in real time via WebSocket. This allows users to see their real-time activity on the website.
+  This data is reported to our server, which then notifies users browsing the Shiro-built website in real time via WebSocket. This allows users to see their real-time activity on the website.
+
 - Slack
 
-    Automatically update your profile to show the currently playing music or other content. Supports customizing profile text and emojis.
+  Automatically update your profile to show the currently playing music or other content. Supports customizing profile text and emojis.
 
 ## How to Use
 
@@ -30,7 +33,6 @@ This project uses the following open-source libraries:
 - [SwiftJotai](https://github.com/unixzii/SwiftJotai)
 - [LaunchAtLogin-Modern](https://github.com/sindresorhus/LaunchAtLogin-Modern)
 - [nowplaying-cli](https://github.com/kirtan-shah/nowplaying-cli)
-
 
 ## Open Source and Contribution
 
