@@ -42,6 +42,22 @@ class Reporter {
     private var disposerList = [Disposable]()
 
     private func sleepHandler() {
+        let distributedNotificationCenter = DistributedNotificationCenter.default()
+
+        distributedNotificationCenter.addObserver(
+            self,
+            selector: #selector(systemWillSleep),
+            name: NSNotification.Name("com.apple.screenIsLocked"),
+            object: nil
+        )
+
+        distributedNotificationCenter.addObserver(
+            self,
+            selector: #selector(systemDidWake),
+            name: NSNotification.Name("com.apple.screenIsUnlocked"),
+            object: nil
+        )
+
         NotificationCenter.default.addObserver(self, selector: #selector(systemWillSleep), name: NSWorkspace.willSleepNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(systemDidWake), name: NSWorkspace.didWakeNotification, object: nil)
     }
