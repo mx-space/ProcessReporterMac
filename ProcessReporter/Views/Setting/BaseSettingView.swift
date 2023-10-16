@@ -20,11 +20,16 @@ struct BaseSettingView: View {
             })
             .keyboardShortcut("S")
 
-            Button("Setting") {
-                NSApplication.shared.activate(ignoringOtherApps: true)
-                Application.openSetting()
+            if #available(macOS 14, *) {
+                SettingsLink(label: {
+                    Text("Settings")
+                }).keyboardShortcut(".", modifiers: .command)
+            } else {
+                Button("Setting") {
+                    NSApplication.shared.activate(ignoringOtherApps: true)
+                    Application.openSetting()
+                }.keyboardShortcut(".", modifiers: .command)
             }
-            .keyboardShortcut(".", modifiers: .command)
         }
     }
 }
