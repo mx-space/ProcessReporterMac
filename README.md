@@ -2,6 +2,14 @@
 
 Process Reporter is a macOS application built with Swift UI. It is designed to report in real time the name of the foreground application being used by the current user on macOS, as well as any media information being played.
 
+## Other Platform
+
+If you looking for other platform...
+
+- [Linux](https://github.com/ttimochan/processforlinux)
+- [Windows(ProcessReporterWin)](https://github.com/ChingCdesu/ProcessReporterWin)
+- [Windows(ProcessReporterWinpy)](https://github.com/TNXG/ProcessReporterWinpy)
+
 ## Main Features
 
 - Real-time reporting of the foreground application being used by the current user
@@ -37,10 +45,6 @@ This project uses the following open-source libraries:
 ## Open Source and Contribution
 
 Process Reporter for Shiro is an open-source project, and we welcome contributions from anyone. If you have any issues or suggestions, feel free to submit an issue or pull request.
-
-## Other Platform
-
-- [Linux](https://github.com/ttimochan/processforlinux)
 
 ## License
 
