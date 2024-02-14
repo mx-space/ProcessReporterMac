@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSAccessibilityUsageDescription</key>
+	<string>我们的应用使用辅助功能服务来读取当前活动窗口的标题，以提供更丰富的功能。</string>
 	<key>NSApplicationRequiresAccessToUserApplicationFolder</key>
 	<true/>
 </dict>

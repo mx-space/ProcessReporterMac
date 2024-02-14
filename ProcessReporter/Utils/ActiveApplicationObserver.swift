@@ -7,6 +7,7 @@
 
 import Cocoa
 import SwiftJotai
+import ApplicationServices
 
 class ActiveApplicationObserver {
     private var observer: NSObjectProtocol?
@@ -32,4 +33,37 @@ class ActiveApplicationObserver {
         guard observer != nil else { return }
         NSWorkspace.shared.notificationCenter.removeObserver(observer)
     }
+    
+    
+    public func getActiveApplicationInfo() -> ActiveApplicationInfo {
+        
+        guard let activeApp = NSWorkspace.shared.frontmostApplication else {
+            
+            debugPrint("no frontmost app")
+            return ActiveApplicationInfo()
+        }
+
+        let appPID = activeApp.processIdentifier
+
+
+        var appRef: AXUIElement?
+        appRef = AXUIElementCreateApplication(appPID)
+
+        var window: CFTypeRef?
+        var title: String?
+
+
+        let result = AXUIElementCopyAttributeValue(appRef!, kAXFocusedWindowAttribute as CFString, &window)
+        if result == .success, let window = window {
+            var windowTitle: CFTypeRef?
+            AXUIElementCopyAttributeValue(window as! AXUIElement, kAXTitleAttribute as CFString, &windowTitle)
+            title = windowTitle as? String
+        }
+
+        return ActiveApplicationInfo(title: title)
+    }
+}
+
+struct ActiveApplicationInfo {
+    var title: String?
 }

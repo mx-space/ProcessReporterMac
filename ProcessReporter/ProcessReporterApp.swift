@@ -27,7 +27,7 @@ struct swiftui_menu_barApp: App {
     var reporter = Reporter.shared
 
     init() {
-        ProcessInfo.processInfo.processName = "NewProcessName"
+        ProcessInfo.processInfo.processName = "ProcessReporter"
         
         NotificationManager.requestNotificationAuthorization()
 

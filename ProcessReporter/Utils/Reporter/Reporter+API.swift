@@ -13,6 +13,13 @@ struct PostData: Codable, Equatable {
     var key: String
     var process: String?
     var media: MediaInfo?
+    var meta: PostMetaData?
+}
+
+struct PostMetaData: Codable, Equatable {
+   var iconUrl: String?
+   var iconBase64: String?
+   var description: String?
 }
 
 struct MediaInfo: Codable, Equatable {
@@ -72,12 +79,22 @@ extension Reporter {
         if processEnabled {
             let workspace = NSWorkspace.shared
             let processName = workspace.frontmostApplication?.localizedName
+            let processTitle = ActiveApplicationObserver.shared.getActiveApplicationInfo().title
+            
+            
             guard let processName else {
                 debugPrint("app unkown")
                 return
             }
 
             postData.process = processName
+            var description: String? = nil
+            if let processTitle = processTitle {
+                description = "\n-> \(processTitle)"
+            }
+            postData.meta = PostMetaData(
+                description: processTitle
+            )
         }
 
         if mediaEnabled {
