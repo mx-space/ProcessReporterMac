@@ -64,6 +64,10 @@ class ActiveApplicationObserver {
     }
 }
 
-struct ActiveApplicationInfo {
+struct ActiveApplicationInfo: Equatable {
     var title: String?
+    
+    static  func ==(lhs: ActiveApplicationInfo, rhs: ActiveApplicationInfo) -> Bool {
+        return lhs.title == rhs.title
+    }
 }

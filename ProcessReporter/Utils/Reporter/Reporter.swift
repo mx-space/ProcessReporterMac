@@ -174,7 +174,7 @@ class Reporter {
         timer = nil
     }
 
-    private func report() {
+    public func report() {
         let shouldReport = JotaiStore.shared.get(Atoms.isReportingAtom)
         if !shouldReport {
             debugPrint("Report is disabled.")

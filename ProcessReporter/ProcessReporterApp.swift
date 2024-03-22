@@ -33,6 +33,7 @@ struct swiftui_menu_barApp: App {
 
         if JotaiStore.shared.get(Atoms.isReportingAtom) {
             reporter.startReporting()
+      
         } else {
             Application.openSetting()
         }
@@ -40,6 +41,7 @@ struct swiftui_menu_barApp: App {
         ActiveApplicationObserver.shared.observe { name in
             JotaiStore.shared.set(Atoms.currentFrontAppAtom, value: name)
         }
+        monitorMouseMove()
     }
 
     var menuIcon: String {
